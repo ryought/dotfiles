@@ -2,7 +2,7 @@ MIN_DOTFILES         := .bash_profile .bashrc .inputrc .vimrc .gitconfig
 DOTFILES             := .bash_sessions_disable .gitconfig .condarc .tmux.conf .gvimrc .ideavimrc .gitignore_global .gdbinit
 DOTFILES_WITH_FOLDER := .matplotlib/matplotlibrc .ipython/profile_default/startup/00first.py .jupyter/custom/custom.css .jupyter/custom/custom.js
 FOLDER               := .vim/snips
-OBJECTS              := $(MIN_DOTFILES) $(DOTFILES) $(DOTFILES_WITH_FOLDER)
+OBJECTS              := $(MIN_DOTFILES) $(DOTFILES) $(DOTFILES_WITH_FOLDER) $(FOLDER)
 TARGETS              := $(patsubst %,%.target,$(OBJECTS))
 
 .PHONY: all
@@ -28,8 +28,10 @@ $(1).target: $(1)
 	mkdir -p $(dir $(HOME)/$(1))
 	if [ -e $(HOME)/$(1) ] && ! readlink $(HOME)/$(1); then \
 		mkdir -p backup/$(1) && mv $(HOME)/$(1) backup/$(1); \
+	elif realink $(HOME)/$(1); then \
+		unlink $(HOME)/$(1); \
 	else :; fi
-	ln -sf $(abspath $(1)) $(HOME)/$(1)
+	ln -sf $(abspath $(1)) $(dir $(HOME)/$(1))
 endef
 
 define folder_template
