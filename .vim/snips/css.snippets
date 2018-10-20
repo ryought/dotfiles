@@ -1,0 +1,23 @@
+snippet centering "子要素を左右上下に中央寄せする"
+.container {
+  display: grid;
+  place-items: center center;
+
+  /* or */
+  display: grid;
+  align-items: center;
+  justify-content: center;
+}
+endsnippet
+
+snippet hide "elemを隠す系"
+.unvisible {
+  /* 場所はとるが表示しない */
+  visibility: hidden;
+}
+
+.remove {
+  /* そもそもレンダリングしない */
+  display: none;
+}
+endsnippet

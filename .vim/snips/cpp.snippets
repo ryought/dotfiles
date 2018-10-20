@@ -1,0 +1,187 @@
+snippet contains "check if vector is containing element x"
+#include <algorithm>
+if(std::find(v.begin(), v.end(), x) != v.end()) {
+	/* v contains x */
+} else {
+	/* v does not contain x */
+}
+if(!v.empty()){
+	/* v is non-empty */
+} else {
+	/* v is empty */
+}
+endsnippet
+
+snippet count "count using for"
+for(; condition; k++);
+endsnippet
+
+snippet at "atcoder template"
+#include <bits/stdc++.h>
+using namespace std;
+ 
+typedef long long ll;
+typedef unsigned long long ull;
+typedef pair<ll, ll> P;
+ 
+#define fi first
+#define se second
+#define repl(i,a,b) for(ll i=(ll)(a);i<(ll)(b);i++)
+#define rep(i,n) repl(i,0,n)
+#define each(itr,v) for(auto itr:v)
+#define pb push_back
+#define all(x) (x).begin(),(x).end()
+#define dbg(x) cout<<#x"="<<x<<endl
+#define mmax(x,y) (x>y?x:y)
+#define mmin(x,y) (x<y?x:y)
+#define maxch(x,y) x=mmax(x,y)
+#define minch(x,y) x=mmin(x,y)
+#define uni(x) x.erase(unique(all(x)),x.end())
+#define exist(x,y) (find(all(x),y)!=x.end())
+#define bcnt __builtin_popcount
+ 
+#define INF INT_MAX/3
+ 
+ll n;
+ll a[2002];
+bitset<4194303> dp,tmp,one;
+ 
+int main(){
+  cin>>n;
+  rep(i,n){
+    cin>>a[i];
+  }
+	ll i=0
+	cout<<i<<endl;
+  return 0;
+}
+endsnippet
+
+snippet # "main template"
+#include<iostream>
+#include<queue>
+#include<bitset>
+#include<algorithm>
+#include<climits>
+#include<vector>
+#include<deque>
+#include<cmath>
+using namespace std;
+typedef long long ll;
+typedef unsigned long long ull;
+typedef long double ld;
+typedef pair<int,int> P;
+#define repl(i,a,b) for(ll i=(ll)(a);i<(ll)(b);i++)
+#define rep(i,n) repl(i,0,n)
+#define all(x) (x).begin(),(x).end()
+#define dbg(x) cout<<#x"="<<x<<endl
+#define dump(a) rep(i,a.size()){ cout<<a[i]<<" "; } cout<<endl;
+#define dumparr(a,n) rep(i,n){ cout<<a[i]<<" "; } cout<<endl;
+#define mmax(x,y) (x>y?x:y)
+#define mmin(x,y) (x<y?x:y)
+#define INF INT_MAX/3
+#define FINF DBL_MAX/3
+#define EPS 1e-7
+#define IN(x) ll x; cin>>x;
+#define OUT1(n1) cout<<n1<<endl
+#define OUT2(n1,n2) cout<<n1<<" "<<n2<<endl
+#define OUT3(n1,n2,n3) cout<<n1<<" "<<n2<<" "<<n3<<endl
+#define OUT4(n1,n2,n3,n4) cout<<n1<<" "<<n2<<" "<<n3<<" "<<n4<<endl
+#define OUT5(n1,n2,n3,n4,n5) cout<<n1<<" "<<n2<<" "<<n3<<" "<<n4<<" "<<n5<<endl
+#define OUT6(n1,n2,n3,n4,n5,n6) cout<<n1<<" "<<n2<<" "<<n3<<" "<<n4<<" "<<n5<<" "<<n6<<endl
+#define OUT(n, ...) OUT##n(__VA_ARGS__)
+
+/*
+ *
+ */
+
+int main(){
+	ll n,k;
+	ll a[2002];
+  cin>>n>>k;
+  rep(i,n){
+    cin>>a[i];
+  }
+  const ll C = 998244353;
+	const ll M = 1e9+7;
+  priority_queue<int> Q;
+	ll a[2002];
+	fill(a,a+n,0);
+	vector<bool> v(n,false); // length, default value
+	fill(all(v), 0);
+	Q.push(0);
+  int t = Q.top(); Q.pop();
+  string s;
+  cin>>s;
+  int b, c;
+  cin>>b>>c;
+	ll i=0;
+	double d = 1.00002;
+  printf("%.10f\n", d);
+	OUT1(i);
+	OUT2((a+b+c), s);
+  return 0;
+}
+endsnippet
+
+snippet usefuls "some useful functions"
+// 数字の桁の和を出力
+int digitsum(ll n) {
+  ll t = n;
+  ll s = 0;
+	while(t>0){
+    s += t % 10;
+    t = t / 10;
+  }
+  return s;
+}
+endsnippet
+
+snippet structure "data structure, collections"
+// pair
+pair<int,int> p = make_pair(i,j);
+P p = P(1,1);
+cout<<p.first<<","<<p.second<<endl;
+
+// vector
+vector<int> V;
+V.push_back(10);
+rep(i,V.size()){
+	cout<<V[i]<<endl;
+}
+sort(V.begin(), V.end());
+
+// vector 二次元配列
+vector<vector<int>> v;
+v = vector<vector<int>>(0, vector<int>(10,0));
+
+// deque
+deque<P> d;
+d.front(); d.pop_front(); // 頭からpop
+d.push_front();
+d.push_back();
+
+// stack
+stack<int> s;
+s.push(0);
+s.top(); s.pop();
+while(!s.empty()){
+}
+s.size();
+
+// priority_
+priority_queue<int> Q;
+Q.push(0);
+int t = Q.top(); Q.pop();
+
+// set
+
+// bitset
+const int LEN = 20000;
+bitset<LEN> bs;
+rep(i,LEN) bs[i] = false;
+bs[0] = true;
+bs.count();
+if(bs.any())
+if(bs.all())
+endsnippet

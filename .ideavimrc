@@ -1,0 +1,13 @@
+set incsearch
+set surround
+
+nnoremap <Space>e :action SearchEverywhere<CR>
+nnoremap <Space>g :action FindInPath<CR>
+nnoremap gd :action GotoDeclaration<CR>
+nnoremap U :action FindUsages<CR>
+nnoremap R :action RenameElement<CR>
+nnoremap <Space>a :action GotoAction<CR>
+nnoremap gcc :action CommentByLineComment<CR>
+vnoremap gcc :action CommentByLineComment<CR>
+nnoremap == :action ReformatCode<CR>
+vnoremap == :action ReformatCode<CR>

@@ -1,0 +1,173 @@
+snippet function "function definition"
+function hoge() {
+	echo $1, $2, $3
+}
+hoge 10 20 30
+endsnippet
+
+snippet #! "shebang" b
+#!/bin/bash
+set -Ceu
+endsnippet
+
+snippet #!h "shebang with help" b
+#!/bin/bash
+set -Ceu
+# u: undefined variable error
+# C: don't overwrite
+grep hoge bar.log > log  # error if log exists
+grep hoge bar.log >| log  # overwrite
+# e: stop anyway when error occured
+make build && true  # continue even if error occured
+endsnippet
+
+snippet forloop "for loop"
+for i in `seq 1 10`
+do
+  test $n 2 10
+	for n in 1000 10000 100000
+	do
+		echo $n
+	done
+done
+endsnippet
+
+snippet argument "引数チェック"
+if [ $# -ne 3 ]; then
+	echo "not enough args" 1>&2
+	exit 1
+fi
+echo "$1: 1st argument"
+endsnippet
+
+snippet getopts "option"
+usage() {
+  echo "Usage: $0 [-w] markdown.md" 1>&2
+  exit 1
+}
+
+while getopts ad:h OPT # [list of flags, : means argument] [variable name]
+do
+  case $OPT in
+    a) echo 'hoge'
+      ;;
+    d) echo "$OPTARG"
+      ;;
+    h) usage
+      ;;
+    \?)  usage
+      ;;
+  esac
+done
+shift $((OPTIND - 1))
+endsnippet
+
+snippet basic
+echo "Hello, $NAME"  # parsed
+echo 'Hello, $NAME'
+echo -e "Hello, \n$NAME"  # escaped
+endsnippet
+
+snippet read
+echo "こちらでよろしいですか？ [Y/n]"
+read ANSWER
+
+case $ANSWER in
+    "" | "Y" | "y" | "yes" | "Yes" | "YES" ) echo "YES!!";;
+    * ) echo "NO!!";;
+esac
+endsnippet
+
+snippet scriptdir "スクリプトのある絶対パスの取得"
+SCRIPT_DIR=$(cd $(dirname \$0); pwd)
+endsnippet
+
+snippet existcommand "コマンドの存在確認"
+if type "コマンド" > /dev/null 2>&1
+then
+	コマンドが存在した場合の処理
+fi
+endsnippet
+
+snippet forlinesincsv "csvの各行についてコマンド実行"
+cat hoge.csv | while read line  
+do
+  url=`echo $line | cut -d',' -f 1`
+  echo $line
+  label=`echo $line | cut -d',' -f 2`
+  echo line $line 
+  echo url $url 
+  echo label $label
+	# some process
+done
+endsnippet
+
+snippet taborspace "連続するタブかスペースをタブに置換する"
+cat foo.txt | sed 's/[\t ]\+/\t/g' | cut -f3
+cat foo.txt | awk '{print $3}'
+endsnippet
+
+snippet whenexit "終了時の処理をかく"
+exitmessage() {
+  echo 'exiting!'
+}
+
+trap exitmessage exit
+endsnippet
+
+snippet seqkit "fastaファイルの処理"
+
+endsnippet
+
+snippet grep "grepのオプション"
+# 空白文字
+grep "Hoge\s*:"
+
+endsnippet
+
+
+snippet stdout "出力関係"
+# ケーブルをソケットにつなぐイメージ
+# ケーブル: >, >>, 1>, 2>, &>
+# ソケット: file, &1, /dev/null
+command 2> file  # stderr を file に
+command 2>&1 # stderrをstdoutに
+command 1> file1 2> file2  # stdout をfile1に stderrをfile2に
+command &> file  # stderr + stdout を fileに
+command &> /dev/null  # 全部消す
+
+# 複数行まとめて、stderr/stdoutまとめて一つのファイルに出力
+{
+  echo 'stdout' >&1
+  echo 'stderr' >&2 
+} &> aaa.log
+endsnippet
+
+snippet tee "パイプの出力を分岐させるteeの使い方"
+# 基本的な使い方: 標準出力にも、log.txtにも出力する
+cmd | tee log.txt
+
+# mkfifo named-pipe
+# (grep "aaa" < named-pipe | wc -l) &
+cat CosmicMutantExport.tsv | head \
+  | grep "KRAS" \
+  | tee \
+      >(grep "aaa" | wc -l >| hoge.txt) \
+  | grep "c" \
+  | wc -l
+
+# 1出力を複数で使いたい時の別解
+# <<< は 変数の中身を入力にする
+# < は ファイルの中身を入力にする
+OUT=$(cmd)
+A=$(grep 'A' <<< $OUT | sed -e "s/.*value=\"\(.*\)\".*/\1/") 
+B=$(grep 'B' <<< $FORM | sed -e "s/.*value=\"\([0-9]*\)\".*/\1/")
+endsnippet
+
+snippet basicbash
+# 続けて実行 改行と同じ意味
+cmd1 ; cmd2
+# 前のが成功したら次も実行
+cmd1 && cmd2
+endsnippet
+

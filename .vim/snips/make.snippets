@@ -1,0 +1,72 @@
+snippet md2 "md to latex conversion using pandoc and lualatex" b
+MD = pandoc -f markdown_github+footnotes+header_attributes+tex_math_dollars+compact_definition_lists+raw_tex+latex_macros -V documentclass=ltjarticle -V geometry:a4paper -V geometry:margin=3cm -V mainfont="Asana Math" -V linestretch=0.9 -V header-includes="\usepackage[version=3]{mhchem} \usepackage{url} \usepackage{wrapfig} \usepackage{graphicx}" --latex-engine=lualatex
+.SUFFIXES: .md .pdf
+.PHONY: all
+all: $1
+.md.pdf: 
+				$(MD) $< -o $@
+endsnippet
+
+snippet md "markdown compile to pdf" b
+MD = md2pdf
+.SUFFIXES: .md .md.pdf
+.PHONY: all
+all: $1
+
+.md.md.pdf: 
+	$(MD) $<
+endsnippet
+
+snippet makeold "c compiler" b
+all: $3
+CC = gcc
+CFLAGS = -Wall
+
+$1 : $2.c
+				$(CC) $< -o $@
+
+run-client:
+				./client 127.0.0.1 1255
+run-server-thr:
+				./server_thr 1255
+run-server-sel:
+				./server_sel 1255
+
+clean:
+				rm -f server_sel client server_thr
+endsnippet
+
+snippet makec "c compiler new" b
+CC = gcc
+CFLAGS = -Wall
+.PHONY: all debug sanitize clean run
+all: $1  # all targets
+hoge: hoge.o fuga.o  # compile separated files
+run:
+				./a.out
+debug:
+				gcc -g $2
+				lldb a.out
+sanitize:
+				gcc -g -fsanitize=address $3
+clean:
+				rm *.out
+endsnippet
+
+snippet docker 
+docker run -v $(realpath ../..):/CSML -it ryought/pyins bash
+endsnippet
+
+snippet cpp "cppの時と最新バージョンの拡張子でのルール指定方法"
+#!/bin/make
+CC := gcc
+CFLAGS := -g -Wall -Wextra
+CXX = g++
+CXXFLAGS = -O2 -Wall
+LDFLAGS = -lm
+
+all: 103c
+
+%.o: %.cpp
+	g++ -Wall -o $@ $< # $@は出力%.o, $<は入力%.cppを表す
+endsnippet

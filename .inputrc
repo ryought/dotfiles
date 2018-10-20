@@ -1,0 +1,17 @@
+# bash用の設定
+$if Bash
+  # 高速な補完
+  set show-all-if-ambiguous on
+  # 大文字小文字を無視
+  set completion-ignore-case on
+  # ベルなし
+  set bell-style none
+  # ディレクトリや実行可能ファイルに印と色
+  set visible-stats on
+  set colored-stats on
+  set mark-symlinked-directories on
+  set colored-completion-prefix on
+  # C-(n|p)でhistory-search
+  "\C-p":history-search-backward
+  "\C-n":history-search-forward
+$endif

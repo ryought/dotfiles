@@ -1,0 +1,18 @@
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+  required = true
+	process = git-lfs filter-process
+[user]
+	name = Ryo Nakabayashi
+  email = ryonakabayashi@gmail.com
+[core]
+  excludesfile = /Users/ryought/.gitignore_global
+  editor = vim
+[alias]
+  st = status
+  unstage = reset HEAD
+  pom = push origin master
+  c = commit
+  graph = log --graph --date=short --decorate=short --pretty=format:'%Cgreen%h %Creset%cd %CBLue%cn %Cred%d %Creset%s'
+

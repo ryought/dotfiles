@@ -1,0 +1,107 @@
+snippet dfig "pdf double figure" b
+\begin{figure}
+\begin{minipage}{0.45\hsize}
+\centering
+\includegraphics[width=0.9\textwidth]{$1.pdf}
+\caption{$2}
+\end{minipage}
+\hfill
+\begin{minipage}{0.45\hsize}
+\centering
+\includegraphics[width=0.9\textwidth]{$3.pdf}
+\caption{$4}
+\end{minipage}
+\end{figure}
+endsnippet
+
+snippet fig "pdf figure" b
+\begin{figure}
+\centering
+\includegraphics[width=0.8\textwidth]{$1.pdf}
+\caption{$2}
+\end{figure}
+endsnippet
+
+snippet table "table" b
+\begin{table}[htb]
+\centering
+\begin{tabular}{$1} 
+\hline
+	&  \\\
+\hline
+\multicolumn{2}{c}{} \\\
+	&   \\\
+\hline
+\end{tabular}
+\caption{   }
+\end{table}
+endsnippet
+
+
+snippet singlefig "single figure" b
+\begin{figure}
+\centering
+\includegraphics[width=0.5\textwidth]{$1.pdf}
+\caption{$2}
+\end{figure}
+endsnippet
+
+snippet foot "foot note with url" i
+\footnote{ \url{ $1 } }
+endsnippet
+
+snippet chem "chemistry"
+\ce{ $1 }
+endsnippet
+
+snippet math "math equation center"
+$e = mc^2$
+$$e^{\pi i} = -1$$
+\begin{align*}
+\frac{1}{2}
+\end{align*}
+endsnippet
+
+snippet cases "math cases with align"
+\begin{align}
+\begin{cases}
+    z   &= 27 + 1/4 x_2 - 1/2 x_3 -3/4 x_6 \\
+    x_1 &= 9  - 1/4 x_2 - 1/2 x_3 -1/4 x_6 \\
+    x_4 &= 21 - 3/4 x_2 - 5/2 x_3 +1/4 x_6\\
+    x_5 &= 6  - 3/2 x_2 - 4   x_3 +1/2 x_6
+\end{cases}
+\end{align}
+endsnippet
+
+snippet array "equation array"
+\begin{eqnarray}
+a_{11} x_1 + a_{12} x_2 + ... + a_{1n} x_n = b_1\\\\
+a_{21} x_1 + a_{22} x_2 + ... + a_{2n} x_n = b_2\\\\
+a_{n1} x_1 + a_{n2} x_2 + ... + a_{nn} x_n = b_n
+\end{eqnarray}
+endsnippet
+
+snippet matrix "matrix"
+$A = \begin{pmatrix}
+a_{11} & a_{12} & ...\\\\\\
+a_{21} & ...\\\\\\
+...
+\end{pmatrix}$
+endsnippet
+
+snippet --- "jekyll toml header"
+single page
+---
+layout: single
+title: About
+permalink: /aboutme/
+---
+
+blog
+---
+title:  "Welcome to Jekyll!"
+date:   2018-04-29 11:46:10 +0900
+categories: jekyll update
+math: true
+---
+endsnippet

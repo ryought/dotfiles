@@ -1,0 +1,14 @@
+*~
+
+# macos general
+.DS_Store
+
+# Thumbnail
+._*
+
+# vim
+.ropeproject/
+
+# npm
+package-lock.json
+yarn.lock

@@ -1,0 +1,569 @@
+snippet #! "Shebang header for python scripts" b
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+$0
+"""
+
+def main():
+    pass
+
+if __name__ == '__main__':
+    main()
+endsnippet
+
+snippet enumerate "for loop by index and each element" b
+for i, elem in enumerate($1):
+	${VISUAL}
+endsnippet
+
+snippet cmdtool "command line tool boilerplate" b
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import argparse
+from tqdm import tqdm
+
+import time
+
+def main():
+    # parse argument
+    psr = argparse.ArgumentParser()
+		# number input
+    psr.add_argument('-n', '--number', default=5, type=int)
+    args = psr.parse_args()
+
+    # main function
+    print('hoge' * args.number)
+
+    # progressbar
+    for i in tqdm(['a', 'b', 'c', 'd']):
+        time.sleep(0.5)
+
+
+if __name__ == '__main__':
+    main()
+endsnippet
+
+snippet """ "docstring"
+"""${1:desctiption}
+
+${2:This is a longer explanation.}
+
+- parameters
+- hogehoge
+
+:param ${3:arg1}: ${4:the first value}
+:param arg2: hoge
+:returns: ${5:hoge}
+:rtype: ${6:str}
+
+:Example:
+
+>>> ${7:import hoge}
+>>> hoge.hoge
+2
+"""
+endsnippet
+
+snippet class "class definition"
+class ${1:classname}:
+    def __init__(self):
+        self.x = 0
+    def ${2:methodname}(self):
+        self.x += 1
+endsnippet
+
+snippet unittest "unittest"
+import unittest
+import ${1:methodfile}
+class ${2:class}(unittest.TestCase):
+		def setUp(self):
+				# initialize
+		def test_${3:title}(self):
+				self.assertEqual()
+				self.assertTrue()
+				with self.assertRaises(TypeError):
+						# expected error
+if __name__ == '__main__':
+    unittest.main()
+endsnippet
+
+snippet argmax "argmax"
+max(enumerate(${1:list}), key=lambda x: x[1])[0]
+endsnippet
+
+snippet 2darray "2 dimensional array initialize"
+$1  = [[0 for _ in range($2)] for _ in range($2)]
+endsnippet
+
+snippet stdin "stdin"
+import sys
+a = []
+for line in sys.stdin:
+    if line[0] != '#':
+        a.append(line.split())
+
+A, B, C = map(int, input().split())
+
+N = input()
+a = [input() for i in range(N)]
+endsnippet
+
+snippet readcsv "read csv/tsv"
+import numpy as np
+data = np.loadtxt(path, delimiter=',', skiprows=0, usecols=(0,1))
+data = np.genfromtxt(path, delimiter='\t', filling_values=(0,0,0))
+# or
+import sys
+data = []
+for line in sys.stdin:
+    if line[0] != '#':
+        data.append(line.split())
+# or
+import pandas as pd
+x = pd.read_table(path, usecols=[0,1,2])
+endsnippet
+
+snippet test "pytest template"
+import pytest
+
+@pytest.fixture
+def variable():
+    x = 'example message'
+    return x
+
+def test_hoge():
+    assert 1 == 1
+
+@pytest.mark.xfail
+def test_i_will_fail():
+    assert 1 == 0
+
+def test_aaa(variable):
+    print(variable)
+    assert variable == 'example message'
+endsnippet
+
+snippet path "import module located in .."
+import sys
+import os
+# __file__は自分の位置
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+import hoge
+
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+endsnippet
+
+snippet file "open text file and read it"
+params = []
+with open('param.txt') as f:
+    for line in f:
+        params.append(line.split())
+endsnippet
+
+snippet init "module __init__"
+# __name__ : 単体実行の時は__main__、モジュール実行の時はモジュール名
+# in module/__init__.py, load module/hoge.py
+# this exposes
+from . import hoge  # whole
+from .hoge import fuga  # partial
+
+# when import module/hoge.py in module/hoge2.py
+import sys
+import os
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))  # このファイルのディレクトリをpathに追加
+import hoge
+from hoge import func
+
+# in main.py
+# access module/__init__.py
+import module
+from module import fuga
+endsnippet
+
+snippet path "abspath"
+import os
+import sys
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+import hack
+endsnippet
+
+snippet numpy "import numpy"
+import numpy as np
+import matplotlib.pyplot as plt
+endsnippet
+
+snippet open "file open"
+with open('.txt', 'rt') as f:
+    for line in f:
+	print(line)
+endsnippet
+
+snippet printoption "supress and format number printing"
+print('{0:04d}'.format(1))
+print('{:0.5f}'.format(15.2))
+print('%03.3f' % 15)
+np.set_printoptions(precision=3, suppress=True)
+np.set_printoptions(formatter={'float': '{: 0.3f}'.format})
+endsnippet
+
+snippet pprint "pretty print"
+from pprint import pprint
+from prettyprinter import cpprint as pprint
+pprint({'a': 'hoge', 'b': 'fuga'})
+endsnippet
+
+snippet timer "calc time of running"
+import timeit
+print(timeit.timeit(lambda: ${1:function(r, K)}, number=10)/10, 'ms')
+
+import time
+start = time.time()
+process()
+end = time.time()
+print(end - start, 's')
+endsnippet
+
+snippet forloop "range usage and break and continue in forloop"
+for i in range(1, 10+1):
+    print(i)
+    if i == 4:
+        continue # ループから抜けずに，次のインデックスに進む
+    print('yaa')
+    if i == 8:
+        break # ループから抜ける
+    print('haa')
+endsnippet
+
+snippet comprehension "リスト内包表記"
+[(x, y) for x in [1,2,3] for y in [3,1,4] if x != y]
+endsnippet
+
+snippet setusage "datastructure set"
+emptyset = set()
+s = set([1,2,3])
+len(s)
+s.issubset(t)
+s.issuperset(t)
+s | t
+s & t
+s - t
+s ^ t # xor
+for a in s:
+	print(a)
+endsnippet
+
+snippet colorprint "print with color in terminal"
+print('\033[31m', x, '\033[m')
+endsnippet
+
+snippet pltsetting "matplotlib settings"
+plt.yscale('log')
+plt.xscale('log')
+plt.grid(which='major', color='black', linestyle='-')
+plt.title('hoge')
+plt.xlim(0, 10)
+plt.ylim(0, 50)
+plt.plot(x, y, label='aa')  # legendに表示させる名前
+plt.legend()
+plt.plot([0, 100], [0, 100], linestyle='dashed', marker='o')  # 点線・丸型マーカー
+
+# subplot: (rows, columns, i), 1 <= i <= rows * columns
+plt.subplots_adjust(wspace=0.4, hspace=0.6) # タイトルと軸ラベルがぶつかってしまう時
+plt.subplot(1, 2, 1)
+plt.xlabel('hoge')
+plt.subplot(1, 2, 2)
+plt.title('hoge') # 各項目の上のタイトル
+plt.suptitle('MainTitle')  # subplotの上につけるタイトル
+
+# scatter s: サイズ
+plt.scatter(x, y, s=100, c=value, cmap='Blues', vmin=0.1, vmax=0.3)  # vmin < c < vmax
+plt.scatter(x, y, c='red')  # 色指定
+plt.colorbar()
+
+# 積み上げ棒グラフ
+labels = np.array([[1,2,3,4], [0,1,5,1], [0,0,0,10]])
+bottom = np.zeros(4)
+for label in labels:
+    plt.bar([0,1,2,3], label, bottom=bottom)
+    bottom += label
+plt.xticks([0,1,2,3], ['a','b','c','d'])
+plt.show()
+
+# plotのサイズを変更する
+plt.figure(figsize=(7, 7))
+endsnippet
+
+snippet 3dplot "3d plot in matplotlib"
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import axes3d    # <- 明示的には使わないが、インポートしておく必要がある。
+# Notebook出力には次の１行が必要（%matplotlib inlineだとグラフを回転できない）
+%matplotlib notebook
+
+fig = plt.figure()
+ax = fig.gca(projection='3d')    # <- axes3dをインポートしていないとエラーになる。
+scatter = ax.scatter3D(X, Y, Z,
+                       s=5,                    # マーカーのサイズ
+                       c=Z,                    # 色分けに使う数値（任意の数値を指定可）
+                       cmap=plt.cm.viridis)    # 色のパターン
+plt.colorbar(scatter)                          # カラーバーを表示（省略可）
+plt.show()
+endsnippet
+
+snippet deepcopy "sharrow copy and deep copy"
+hoge = [1,2,3]
+fuga = list(hoge)
+import copy
+fuga = copy.deepcopy(hoge)
+endsnippet
+
+snippet countfreq "count frequency in list as dict"
+ni = {}
+for i in range(len(labels)):
+	ni[labels[i]] = ni[labels[i]] + 1 if labels[i] in ni else 1
+endsnippet
+
+snippet sortdict "dictionary sorting"
+sorted(d.items(), key=lambda x: x[0])
+sorted(d.items(), key=lambda x: x[1], reverse=True)
+endsnippet
+
+snippet fordict "for loop over dictionary"
+for k, v in d.items():
+	print(k,v)
+for k in d.keys():
+	print(k)
+for v in d.values():
+	print(v)
+endsnippet
+
+snippet random "numpy random"
+# Unif(0,1)
+np.random.rand()
+np.random.rand(N)
+# N(0,1)
+np.random.randn(10)
+# N(mu, sigma)
+np.random.normal(mu, sigma, N)
+# Integer
+np.random.randint(0, 100, 20) # [0, 100) 20 sample
+# seed
+np.random.seed(n)
+endsnippet
+
+snippet numpyreverse "reverse ndarray"
+a = ndarray[::-1]
+endsnippet
+
+snippet atcoder "atcoder input"
+s = raw_input()
+A, B, C, D = map(int, raw_input().split())
+endsnippet
+
+snippet graph "グラフ描くテンプレ"
+# -*- coding: utf-8 -*-
+import math
+import numpy as np
+import matplotlib.pyplot as plt
+
+def main():
+    x = np.linspace(0, 1, 100)
+    y = np.exp(x)
+
+    plt.plot(x, y)
+    plt.show()
+
+if __name__ == '__main__':
+    main()
+endsnippet
+
+snippet numpytips "numpy hints"
+# x^T y
+np.dot(x, y)
+x @ y
+# AB
+np.matmul(A, B)
+A @ B
+# x y^T
+np.outer(x, y)
+endsnippet
+
+snippet print3 "print options in python3"
+print('A', 'B', 'C', sep=', ', end='')
+with open('out.txt', 'w') as f:
+	print('hoge', file=f)
+print(open('out.txt'.read()))
+endsnippet
+
+snippet reduce3 "reduce in python3"
+from functools import reduce
+endsnippet
+
+snippet fileupdatetime "get file update time in POSIX"
+import os
+import datetime
+time = datetime.datetime.fromtimestamp(os.stat(mpath).st_mtime)
+timeFmt = time.strftime('%Y/%m/%d %H:%M:%S')
+endsnippet	
+
+snippet argparse "argument parser"
+# argparse
+# https://docs.python.jp/3/library/argparse.html
+import argparse
+parser = argparse.ArgumentParser(description='Main Program Description')
+parser.add_argument('path', metavar='path', type=str, help='required positional string argument(e.g. path)')
+parser.add_argument('integers', metavar='N', nargs='+', type=int, help='required positional integer. one or more integer are required.')
+parser.add_argument('-g', '--generate', dest='hoge', help='optional argument')
+parser.add_argument('--aa', dest='aa', default=42, help='have default value( --aa 52 if not exist, aa=42 )')
+parser.add_argument('--mode', required=True, help='required flag( --mode HOGE )')
+parser.add_argument('mode', type=str, help='upload or fetch', choices=['upload', 'fetch'])
+parser.add_argument('--debug', action='store_true', help='Bool flag( --debug or no )')
+args = parser.parse_args()
+print(args.path, args.hoge, args.aa, args.mode, args)
+endsnippet
+
+snippet pickle "pickle usage"
+# save
+import pickle
+data = {
+	'a': [1, 2, 3]
+}
+with open('hoge.pkl', 'wb') as f:
+	pickle.dump(data, f)
+
+# load
+import pickle
+with open('hoge.pkl', 'rb') as f:
+	data = pickle.load(f)
+
+# faster alternatives
+import hickle as hkl  # pickleの高速バージョン
+hkl.dump(data, filename, mode='w', compression='gzip')
+data = hkl.load(filename)
+endsnippet
+
+snippet log "logger snippet"
+import logging
+logger = logging.getLogger(__name__)
+FORMAT = '%(asctime)-15s %(name)s %(levelname)s %(message)s'
+logging.basicConfig(level=logging.DEBUG, format=FORMAT)
+
+def main():
+    logger.debug('This message should go to the log file')
+    logger.info('So should this')
+    logger.warning('And this, too')
+    logger.error('And this, too')
+endsnippet
+
+snippet directory
+import os
+# 存在確認
+os.path.exists(path)
+os.path.isfile(base + 'roi.json')
+os.path.isdir(base + 'roi.json')
+# 作る
+os.mkdir('hoge')  # 1ファイル
+os.makedirs('hoge/fuga/aa')  # 構造
+# 種類の判定
+
+#ファイルリスト取得
+import glob
+l = glob.glob('test/*.txt')
+endsnippet
+
+snippet break-double-for-loop "二重for loopを抜ける"
+# 案1
+N = 0
+for i in range(10):
+    for j in range(10):
+				N += 1
+        if N >= 25:
+            break
+    else:
+        continue
+    break
+
+# 案2
+N = 0
+class EndLoop(Exception):
+		pass
+try:
+		for i in range(10):
+				for j in range(10):
+						N += 1
+						if N >= 25:
+								raise EndLoop
+except EndLoop:
+		print('ended')
+endsnippet
+
+snippet json "python json"
+import json
+if os.path.isfile(imgDir + 'roi.json'):
+		# すでにあるのでオープン
+		with open(imgDir + 'roi.json') as f:
+				datafile = json.load(f)
+with open(imgDir + 'roi.json', 'w') as f:
+		json.dump(datafile, f, indent=2)
+# r: 読み込み
+# w: 上書き
+# x: 新規作成のみ、ファイルがある時は失敗
+# a: 追記 append
+# b, t: バイナリ, テキスト
+endsnippet
+
+snippet tar "tar extract archive in python"
+import tarfile
+with tarfile.open('dataset_tmp.tar.gz', mode='r:gz') as tar:
+		tar.extractall(path='extracted/')
+with tarfile.open(filename, mode='w:gz') as archive:
+		archive.add('test_dataset')
+endsnippet
+
+snippet webdownload "file download"
+import urllib.request
+urllib.request.urlretrieve('https://drive.google.com/uc?id=' + fileId, 'dataset_tmp.tar.gz')
+endsnippet
+
+snippet ipython "ipython notebook useful commands"
+# module 自動でリロードする
+# https://qiita.com/Accent/items/f6bb4d4b7adf268662f4
+# 2の時は全てのモジュールを毎回リロードする
+%load_ext autoreload
+%autoreload 2
+
+# インタラクティブに動かす(py3) 
+%matplotlib inline
+from ipywidgets import interact
+# 画像
+@interact
+def display3DImage(z: (0, image.shape[2]-1)):
+    plt.subplot(1, 2, 1)
+    plt.imshow(image[:, :, z], cmap='jet')
+    plt.subplot(1, 2, 2)
+    plt.imshow(label[:, :, z], cmap='jet', vmin=0, vmax=200)
+    plt.show()
+# 数字
+@interact
+def hoge(x: (0, 500)):
+    print(x ** 2)
+endsnippet
+
+snippet print
+print(f'my name is {name} and id is {uid:x}')
+endsnippet
+
+snippet argv "コマンドライン引数と環境変数の取得"
+import sys
+if len(sys.argv) == 2:
+	print(sys.argv)  # ['hoge.py', 'abc'] if python hoge.py abc
+
+import os
+os.environ['PATH']
+endsnippet
+
+snippet add_axis "add axis to np array"
+a = np.zeros((10,10))
+a[np.newaxis, np.newaxis, :, :].shape # -> (1,1,10,10)
+endsnippet
