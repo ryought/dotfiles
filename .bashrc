@@ -12,7 +12,7 @@ shopt -s globstar  # 「**」が使えるようになる
 ## completion / plugin ##
 # z - cd fast with history
 [ -f /usr/local/etc/profile.d/z.sh ] && . /usr/local/etc/profile.d/z.sh
-# fzf - fuzzy finder 
+# fzf - fuzzy finder
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 ## command ##
@@ -31,7 +31,7 @@ if type __git_ps1 > /dev/null 2>&1 ; then
   GIT_PS1_SHOWCOLORHINTS=1
   git_prompt='$(__git_ps1)'
 fi
-if [ -n "$SSH_CLIENT" ]; then 
+if [ -n "$SSH_CLIENT" ]; then
   # ssh
   PS1="\[\033[33m\](\t) \[\033[37m\033[41m\] \u@\h \[\033[00m\] \[\033[01m\]\w\[\033[31;2m\]${git_prompt}\[\033[00m\] \\$ "
 elif [ $UID -eq 0 ]; then
@@ -81,7 +81,7 @@ cd () {
   builtin cd "$@" && ls
 }
 back () {
-  cd -- 
+  cd --
 }
 
 function cs() {
