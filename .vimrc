@@ -31,8 +31,9 @@ Plug 'pangloss/vim-javascript'
 Plug 'maxmellon/vim-jsx-pretty', { 'for': ['vue', 'jsx'] }
 Plug 'leafgarland/typescript-vim'  " typescript syntax highlighting
 Plug 'Quramy/tsuquyomi'  " typescript IDE, client of TSServer
-
+" python
 Plug 'davidhalter/jedi-vim'  " python completion こっちの方が良さげ
+Plug 'vim-syntastic/syntastic'
 Plug 'dag/vim2hs'  " haskell
 Plug 'tpope/vim-fugitive'  " git plugin
 Plug 'airblade/vim-gitgutter'
@@ -77,7 +78,6 @@ set background=dark
 try
   colorscheme gruvbox
 catch /^Vim\%((\a\+)\)\=:E185/
-  
 endtry
 
  "ベルを無効化
@@ -183,11 +183,6 @@ let g:ctrlp_use_migemo = 1
 if executable('ag')
   let g:ackprg = 'ag --vimgrep --smart-case'
 endif
-" cnoreabbrev ag Ack
-" cnoreabbrev aG Ack
-" cnoreabbrev Ag Ack
-" cnoreabbrev AG Ack
-
 
 " ultisnips
 let g:UltiSnipsExpandTrigger="<tab>"
@@ -267,16 +262,6 @@ autocmd FileType html syntax sync fromstart
 inoremap # X<c-h>#
 " indent
 autocmd BufNewFile,BufRead *.py setlocal expandtab tabstop=4 shiftwidth=4
-" python-mode (plugin) setting
-" let g:pymode = 1
-" let g:pymode_python = 'python3'
-" let g:pymode_options = 1
-" let g:pymode_folding = 0
-" let g:pymode_rope_completion = 1
-" let g:pymode_rope_goto_definition_bind = "<leader>d"
-" let g:pymode_run_bind = "<leader>r"
-" let g:pymode_virtualenv = 1
-let g:pymode_rope = 0  "disable
 
 " jedi-vim
 let g:jedi#popup_on_dot = 0
@@ -289,7 +274,7 @@ let g:jedi#completions_command = "<C-Space>"
 let g:jedi#rename_command = "<leader>r"
 
 " syntax checking 重いのできってある
-let g:syntastic_python_checkers = ["pyflakes"]
+let g:syntastic_python_checkers = ["pyflakes"]  " pylintは厳しい
 " let g:syntastic_always_populate_loc_list = 1
 " let g:syntastic_auto_loc_list = 1
 " let g:syntastic_check_on_open = 1
