@@ -28,8 +28,6 @@ $(1).target: $(1)
 	mkdir -p $(dir $(HOME)/$(1))
 	if [ -e $(HOME)/$(1) ] && ! readlink $(HOME)/$(1); then \
 		mkdir -p backup/$(1) && mv $(HOME)/$(1) backup/$(1); \
-	elif readlink $(HOME)/$(1); then \
-		unlink $(HOME)/$(1); \
 	else :; fi
 	ln -sf $(abspath $(1)) $(dir $(HOME)/$(1))
 endef
@@ -40,6 +38,8 @@ $(1).target: $(1)
 	@echo "$(1): link to $(HOME)/$(1)"
 	if [ -e $(HOME)/$(1) ] && ! readlink $(HOME)/$(1); then \
 		mkdir -p backup/$(1) && mv $(HOME)/$(1) backup/$(1); \
+	elif readlink $(HOME)/$(1); then \
+		unlink $(HOME)/$(1); \
 	else mkdir -p $(dir $(HOME)/$(1)); fi
 	ln -s $(abspath $(1)) $(HOME)/$(1)
 endef
