@@ -28,7 +28,7 @@ $(1).target: $(1)
 	mkdir -p $(dir $(HOME)/$(1))
 	if [ -e $(HOME)/$(1) ] && ! readlink $(HOME)/$(1); then \
 		mkdir -p backup/$(1) && mv $(HOME)/$(1) backup/$(1); \
-	elif realink $(HOME)/$(1); then \
+	elif readlink $(HOME)/$(1); then \
 		unlink $(HOME)/$(1); \
 	else :; fi
 	ln -sf $(abspath $(1)) $(dir $(HOME)/$(1))
