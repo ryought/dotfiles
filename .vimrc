@@ -20,6 +20,9 @@ Plug 'ntpeters/vim-better-whitespace'
 Plug 'tmhedberg/matchit'  " html tag % matching
 Plug 'tpope/vim-surround'  " surrounding pattern
 Plug 'morhetz/gruvbox' "color-scheme
+" syntax check, lint
+" Plug 'vim-syntastic/syntastic'
+Plug 'w0rp/ale'
 " go
 Plug 'vim-jp/vim-go-extra' , { 'for': 'go' }
 Plug 'fatih/vim-go' , { 'for': 'go', 'do': ':GoInstallBinaries' }
@@ -33,7 +36,6 @@ Plug 'leafgarland/typescript-vim'  " typescript syntax highlighting
 Plug 'Quramy/tsuquyomi'  " typescript IDE, client of TSServer
 " python
 Plug 'davidhalter/jedi-vim'  " python completion こっちの方が良さげ
-Plug 'vim-syntastic/syntastic'
 Plug 'dag/vim2hs'  " haskell
 Plug 'tpope/vim-fugitive'  " git plugin
 Plug 'airblade/vim-gitgutter'
@@ -81,7 +83,7 @@ catch /^Vim\%((\a\+)\)\=:E185/
 endtry
 
  "ベルを無効化
-set noerrorbells 
+set noerrorbells
 set novisualbell
 set t_vb=
 
@@ -273,12 +275,19 @@ let g:jedi#usages_command = "<leader>n"
 let g:jedi#completions_command = "<C-Space>"
 let g:jedi#rename_command = "<leader>r"
 
-" syntax checking 重いのできってある
-let g:syntastic_python_checkers = ["pyflakes"]  " pylintは厳しい
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 1
-" let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+" ale
+" エラー間移動
+nmap <silent> <C-k> <Plug>(ale_previous_wrap)
+nmap <silent> <C-j> <Plug>(ale_next_wrap)
+let g:ale_linters = {
+      \ 'javascript': ['eslint'],
+      \ 'python': ['flake8'],
+      \ 'cpp': ['clang'],
+      \ 'c': ['clang'],
+      \ }
+let g:ale_lint_on_enter = 0  " オープン時のチェックをしない
+let g:ale_sign_error = 'x'
+let g:ale_sign_warning = '>'
 
 " go
 autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
