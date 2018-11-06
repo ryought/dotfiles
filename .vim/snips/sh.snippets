@@ -8,6 +8,7 @@ endsnippet
 snippet #! "shebang" b
 #!/bin/bash
 set -Ceu
+cd $(dirname $0)
 endsnippet
 
 snippet #!h "shebang with help" b
@@ -80,6 +81,9 @@ endsnippet
 
 snippet scriptdir "スクリプトのある絶対パスの取得"
 SCRIPT_DIR=$(cd $(dirname \$0); pwd)
+
+# スクリプトのあるディレクトリに移動
+cd $(dirname $0)
 endsnippet
 
 snippet existcommand "コマンドの存在確認"

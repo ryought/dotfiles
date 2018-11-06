@@ -21,7 +21,6 @@ Plug 'tmhedberg/matchit'  " html tag % matching
 Plug 'tpope/vim-surround'  " surrounding pattern
 Plug 'morhetz/gruvbox' "color-scheme
 " syntax check, lint
-" Plug 'vim-syntastic/syntastic'
 Plug 'w0rp/ale'
 " go
 Plug 'vim-jp/vim-go-extra' , { 'for': 'go' }
@@ -281,9 +280,10 @@ nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 let g:ale_linters = {
       \ 'javascript': ['eslint'],
-      \ 'python': ['flake8'],
+      \ 'python': ['flake8', 'pyflakes'],
       \ 'cpp': ['clang'],
       \ 'c': ['clang'],
+      \ 'rust': ['cargo'],
       \ }
 let g:ale_lint_on_enter = 0  " オープン時のチェックをしない
 let g:ale_sign_error = 'x'

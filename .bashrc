@@ -31,6 +31,8 @@ if type __git_ps1 > /dev/null 2>&1 ; then
   GIT_PS1_SHOWCOLORHINTS=1
   git_prompt='$(__git_ps1)'
 fi
+# prompt definition
+export PROMPT_DIRTRIM=3  # trim path longer than 3
 if [ -n "$SSH_CLIENT" ]; then
   # ssh
   PS1="\[\033[33m\](\t) \[\033[37m\033[41m\] \u@\h \[\033[00m\] \[\033[01m\]\w\[\033[31;2m\]${git_prompt}\[\033[00m\] \\$ "
