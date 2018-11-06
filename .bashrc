@@ -118,7 +118,6 @@ export LANG=ja_JP.UTF-8
 
 # on hx cluster
 if [ -d "/work/ryought/tools/anaconda3" ]; then
-  echo "hoge"
   __conda_setup="$(CONDA_REPORT_ERRORS=false '/work/ryought/tools/anaconda3/bin/conda' shell.bash hook 2> /dev/null)"
   if [ $? -eq 0 ]; then
     \eval "$__conda_setup"
