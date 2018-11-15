@@ -8,7 +8,7 @@
 #
 
 # homebrew
-export PATH=/usr/local/anaconda3/bin:$PATH:/usr/local/bin
+export PATH=/home/ryought/work/tools/vim/bin:/work/ryought/tools/anaconda3/bin:/usr/local/anaconda3/bin:$PATH:/usr/local/bin
 # android
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
