@@ -10,44 +10,48 @@ endif
 " package manager: plug.vim
 "  to install, run below
 " $ curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-call plug#begin('~/.vim/plugged')
-Plug 'ctrlpvim/ctrlp.vim'  " fuzzy file finder
-Plug 'lokikl/vim-ctrlp-ag'
-Plug 'mileszs/ack.vim'
-Plug 'SirVer/ultisnips'  " snippet
-Plug 'tpope/vim-commentary'  " gc commentize
-Plug 'ntpeters/vim-better-whitespace'
-Plug 'tmhedberg/matchit'  " html tag % matching
-Plug 'tpope/vim-surround'  " surrounding pattern
-Plug 'morhetz/gruvbox' "color-scheme
-" syntax check, lint
-Plug 'w0rp/ale'
-" go
-Plug 'vim-jp/vim-go-extra' , { 'for': 'go' }
-Plug 'fatih/vim-go' , { 'for': 'go', 'do': ':GoInstallBinaries' }
-Plug 'posva/vim-vue', { 'for': 'vue' }
-Plug 'godlygeek/tabular'  " align text `:Tab /=`
-Plug 'plasticboy/vim-markdown'
-" js, ts
-Plug 'pangloss/vim-javascript'
-Plug 'maxmellon/vim-jsx-pretty', { 'for': ['vue', 'jsx'] }
-Plug 'leafgarland/typescript-vim'  " typescript syntax highlighting
-Plug 'Quramy/tsuquyomi'  " typescript IDE, client of TSServer
-" python
-Plug 'davidhalter/jedi-vim'  " python completion こっちの方が良さげ
-Plug 'dag/vim2hs'  " haskell
-Plug 'tpope/vim-fugitive'  " git plugin
-Plug 'airblade/vim-gitgutter'
-Plug 'editorconfig/editorconfig-vim'  " editorconfig
-Plug 'rust-lang/rust.vim'  " rust
-Plug 'JuliaEditorSupport/julia-vim' " julia
-if has('mac')
-  Plug '/usr/local/opt/fzf'
-else
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+if filereadable(expand('~/.vim/autoload/plug.vim'))
+  call plug#begin('~/.vim/plugged')
+  Plug 'ctrlpvim/ctrlp.vim'  " fuzzy file finder
+  Plug 'lokikl/vim-ctrlp-ag'
+  Plug 'mileszs/ack.vim'
+  Plug 'SirVer/ultisnips'  " snippet
+  Plug 'tpope/vim-commentary'  " gc commentize
+  Plug 'ntpeters/vim-better-whitespace'
+  Plug 'tmhedberg/matchit'  " html tag % matching
+  Plug 'tpope/vim-surround'  " surrounding pattern
+  " color-scheme
+  Plug 'morhetz/gruvbox'
+  " syntax check, lint
+  Plug 'w0rp/ale'
+  " go
+  Plug 'vim-jp/vim-go-extra' , { 'for': 'go' }
+  Plug 'fatih/vim-go' , { 'for': 'go', 'do': ':GoInstallBinaries' }
+  Plug 'posva/vim-vue', { 'for': 'vue' }
+  Plug 'godlygeek/tabular'  " align text `:Tab /=`
+  Plug 'plasticboy/vim-markdown'
+  " js, ts
+  Plug 'pangloss/vim-javascript'
+  Plug 'maxmellon/vim-jsx-pretty', { 'for': ['vue', 'jsx'] }
+  Plug 'leafgarland/typescript-vim'  " typescript syntax highlighting
+  Plug 'Quramy/tsuquyomi'  " typescript IDE, client of TSServer
+  " python
+  Plug 'davidhalter/jedi-vim'  " python completion こっちの方が良さげ
+  Plug 'dag/vim2hs'  " haskell
+  Plug 'tpope/vim-fugitive'  " git plugin
+  Plug 'airblade/vim-gitgutter'
+  Plug 'editorconfig/editorconfig-vim'  " editorconfig
+  Plug 'rust-lang/rust.vim'  " rust
+  Plug 'JuliaEditorSupport/julia-vim' " julia
+  if has('mac')
+    Plug '/usr/local/opt/fzf'
+  else
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  endif
+  Plug 'junegunn/fzf.vim'
+  call plug#end()
 endif
-Plug 'junegunn/fzf.vim'
-call plug#end()
+
 
 " ============= SETTINGS ==================
 " 必須系
@@ -55,6 +59,9 @@ filetype plugin indent on  "filetype, plugin, indentを有効化
 syntax enable
 set nocompatible
 set fenc=utf-8  "文字コードをUFT-8に設定
+set encoding=utf-8
+set fileencodings=iso-2022-jp,euc-jp,sjis,utf-8
+set fileformats=unix,dos,mac
 set autoread  " 編集中のファイルが変更されたら自動で読み直す
 set hidden "バッファが編集中でも他のファイルを開けるように
 set showcmd "入力中のコマンドをステータスに表示
@@ -80,6 +87,10 @@ try
   colorscheme gruvbox
 catch /^Vim\%((\a\+)\)\=:E185/
 endtry
+
+
+if v:version < 800
+endif
 
  "ベルを無効化
 set noerrorbells

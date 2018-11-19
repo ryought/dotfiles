@@ -8,14 +8,19 @@
 #
 
 # homebrew
-export PATH=/home/ryought/work/tools/vim/bin:/work/ryought/tools/anaconda3/bin:/usr/local/anaconda3/bin:$PATH:/usr/local/bin
+if [ -d "/work/ryought/" ]; then
+  export PATH=/work/ryought/tools/vim/bin:/work/ryought/tools/anaconda3/bin:$PATH:/usr/local/bin
+else
+  export PATH=/usr/local/anaconda3/bin:$PATH:/usr/local/bin
+fi
+
 # android
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 # golang
 export GOPATH=$HOME/src/go
 # mytools
-export PATH=$PATH:$HOME/src/dotfiles/tools
+export PATH=$PATH:$HOME/src/dotfiles-private/tools
 
 
 #
@@ -43,15 +48,6 @@ fi
 # fi
 [ -f /usr/local/etc/bash_completion ] && . /usr/local/etc/bash_completion
 [ -f /usr/local/anaconda3/etc/profile.d/conda.sh ] && . /usr/local/anaconda3/etc/profile.d/conda.sh
-
-# BREW_SCRIPTS="$(brew --prefix)/etc/bash_completion.d"
-# if [ -d "$BREW_SCRIPTS" ]; 
-# then 
-#   for script in $(find $BREW_SCRIPTS -type l) ; 
-#   do 
-#     . $script ; 
-#   done 
-# fi
 
 #
 # load .bashrc
