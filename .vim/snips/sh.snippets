@@ -7,7 +7,7 @@ endsnippet
 
 snippet #! "shebang" b
 #!/bin/bash
-set -Ceu
+set -Ceuo pipefail
 cd $(dirname \$0)
 endsnippet
 
@@ -39,6 +39,30 @@ if [ $# -ne 3 ]; then
 	exit 1
 fi
 echo "$1: 1st argument"
+endsnippet
+
+snippet fileexist "ファイル存在確認"
+[ -e $FILE ]  # exist?
+[ -f $FILE ]  # file?
+[ -r $FILE ]  # readable?
+[ -s $FILE ]  # has content?
+[ -d $DIR ]  # directory exist?
+if [ ! -r $FILE ]; then
+  echo 'cannot read file'
+  exit 1
+fi
+endsnippet
+
+snippet ifelse "if statement"
+if (( $x > 2 && $x <= 5 )); then
+	echo 'hoge'
+else
+	echo 'aa'
+fi
+
+if [[ $x == "ABC" ]]; then
+	echo 'ok'
+fi
 endsnippet
 
 snippet getopts "option"
@@ -145,6 +169,11 @@ command &> /dev/null  # 全部消す
   echo 'stdout' >&1
   echo 'stderr' >&2 
 } &> aaa.log
+
+# multiple stdin diff
+# only in bash
+diff <(cat hoge) <(cat fuga)
+paste <(cat hoge) <(cat fuga)
 endsnippet
 
 snippet tee "パイプの出力を分岐させるteeの使い方"
