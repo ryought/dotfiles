@@ -136,3 +136,12 @@ fi
 if [ -e "/opt/ros/kinetic/setup.bash" ]; then
   .  /opt/ros/kinetic/setup.bash
 fi
+
+# on vmware
+# export SVGA_VGPU10=0
+
+# C-s, C-q
+if [[ -t 0 ]]; then
+  stty stop undef  # disable C-s
+  stty start undef  # disable C-q fi
+fi
