@@ -57,20 +57,13 @@ else
 fi
 
 ## history ##
-
 # 複数プロセスでhistoryファイルの共有
-# (bad)http://yuzugosho.blog.fc2.com/blog-entry-8.html
-# (good)https://unix.stackexchange.com/questions/18212/bash-history-ignoredups-and-erasedups-setting-conflict-with-common-history
-shopt -s histappend
-export PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"
+# http://iandeth.dyndns.org/mt/ian/archives/000651.html
+shopt -u histappend
+export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 export HISTCONTROL=erasedups:ignoreboth  # 空白始まりと重複コマンドは記録しない
 export HISTSIZE=1000000
 export HISTIGNORE="history*:ls*:la*:fg*:bg*:vi"
-
-# 終了時にhistoryファイルを共有するだけなら下
-# shopt -s histappend
-
-# TODO どこで使ったコマンドかを覚えておく
 
 ## alias ##
 alias grep="grep --color"
