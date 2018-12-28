@@ -124,3 +124,8 @@ if [ -d "/work/ryought/tools/anaconda3" ]; then
   fi
   unset __conda_setup
 fi
+
+# on ubuntu with ROS
+if [ -e "/opt/ros/kinetic/setup.bash" ]; then
+  .  /opt/ros/kinetic/setup.bash
+fi
