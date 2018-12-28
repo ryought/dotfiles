@@ -60,7 +60,7 @@ syntax enable
 set nocompatible
 set fenc=utf-8  "文字コードをUFT-8に設定
 set encoding=utf-8
-set fileencodings=iso-2022-jp,euc-jp,sjis,utf-8
+set fileencodings=utf-8,iso-2022-jp,euc-jp,sjis,utf-8
 set fileformats=unix,dos,mac
 set autoread  " 編集中のファイルが変更されたら自動で読み直す
 set hidden "バッファが編集中でも他のファイルを開けるように
