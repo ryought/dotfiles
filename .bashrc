@@ -57,17 +57,13 @@ else
 fi
 
 ## history ##
-
 # 複数プロセスでhistoryファイルの共有
-# (good)https://unix.stackexchange.com/questions/18212/bash-history-ignoredups-and-erasedups-setting-conflict-with-common-history
-shopt -s histappend
-export PROMPT_COMMAND="history -n; history -w; history -c; history -r; $PROMPT_COMMAND"
+# http://iandeth.dyndns.org/mt/ian/archives/000651.html
+shopt -u histappend
+export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
 export HISTCONTROL=erasedups:ignoreboth  # 空白始まりと重複コマンドは記録しない
 export HISTSIZE=1000000
 export HISTIGNORE="history*:ls*:la*:fg*:bg*:vi"
-
-# 終了時にhistoryファイルを共有するだけなら下
-# shopt -s histappend
 
 ## alias ##
 alias grep="grep --color"
@@ -133,4 +129,18 @@ if [ -d "$HOME/work/tools/anaconda3" ]; then
 
   # qtop, to avoid inconsistent perl version error
   alias qtop='PATH=/bio/bin:/usr/local/bin:/bin:/usr/bin:/grid/sgeadmin/bin/lx24-amd64 qtop'
+fi
+
+# on ubuntu with ROS
+if [ -e "/opt/ros/kinetic/setup.bash" ]; then
+  .  /opt/ros/kinetic/setup.bash
+fi
+
+# on vmware
+# export SVGA_VGPU10=0
+
+# C-s, C-q
+if [[ -t 0 ]]; then
+  stty stop undef  # disable C-s
+  stty start undef  # disable C-q fi
 fi
