@@ -9,6 +9,15 @@ shopt -s nocaseglob  # 「*」などのパス名展開で大文字小文字を�
 shopt -s dirspell
 shopt -s globstar  # 「**」が使えるようになる
 
+## history ##
+# sync history with multiple session
+# http://iandeth.dyndns.org/mt/ian/archives/000651.html
+shopt -u histappend
+export PROMPT_COMMAND="history -a; history -c; history -r;"
+export HISTCONTROL=erasedups:ignoreboth
+export HISTSIZE=1000000
+export HISTIGNORE="history*:ls*:la*:fg*:bg*:vi"
+
 ## completion / plugin ##
 # z - cd fast with history
 [ -f /usr/local/etc/profile.d/z.sh ] && . /usr/local/etc/profile.d/z.sh
@@ -55,15 +64,6 @@ else
   alias ls='ls --color=auto'
   alias la="ls -la -h --color=auto"
 fi
-
-## history ##
-# 複数プロセスでhistoryファイルの共有
-# http://iandeth.dyndns.org/mt/ian/archives/000651.html
-shopt -u histappend
-export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
-export HISTCONTROL=erasedups:ignoreboth  # 空白始まりと重複コマンドは記録しない
-export HISTSIZE=1000000
-export HISTIGNORE="history*:ls*:la*:fg*:bg*:vi"
 
 ## alias ##
 alias grep="grep --color"
