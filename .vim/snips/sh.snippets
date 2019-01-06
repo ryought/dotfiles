@@ -204,3 +204,16 @@ cmd1 ; cmd2
 cmd1 && cmd2
 endsnippet
 
+
+snippet varsub "variable substitution"
+# normal var
+${VAR}
+# front match
+${VAR#prefix}
+# back match
+${VAR%suffix}
+endsnippet
+
+snippet stderrtee "tee-ing stdout and stderr"
+2>&1 | tee <output filename>
+endsnippet
