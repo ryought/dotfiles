@@ -319,3 +319,5 @@ autocmd BufRead,BufNewFile *.launch set filetype=xml
 " vue .vueが崩れる時用
 autocmd FileType vue syntax sync fromstart
 
+" lisp
+let g:lisp_rainbow = 1
