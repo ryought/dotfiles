@@ -102,7 +102,7 @@ export LANG=ja_JP.UTF-8
 [ -f ~/.inputrc ] && bind -f ~/.inputrc
 
 ## my own tools
-PATH="$PATH:$HOME/.tools"
+PATH="$PATH:$HOME/.tools:$HOME/.tools-private/bin"
 
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
