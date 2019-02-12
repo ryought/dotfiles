@@ -1,5 +1,11 @@
 #!/bin/bash
 # vim: set ft=sh
+if [ $# -ne 1 ]; then
+	echo "not enough args" 1>&2
+	echo "usage: pwget <url list, delimited by newline>" 1>&2
+	exit 1
+fi
+
 echo downloading $1
 cat $1 | xargs -n 1 -P 16 wget -q
 echo finished
