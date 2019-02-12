@@ -1,0 +1,55 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+pitch shifter
+"""
+
+from pydub import AudioSegment
+import filetype
+import argparse
+
+def main():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('filename', type=str, help='file')
+    parser.add_argument('-u', dest='up', type=int, default=0, help='optional argument')
+    parser.add_argument('-d', dest='down', type=int, default=0, help='optional argument')
+    args = parser.parse_args()
+
+    print(args.filename, args.up, args.down)
+    filename = args.filename
+
+    kind = filetype.guess(filename)
+    if kind is None:
+        return
+    elif kind.mime == 'audio/mpeg':
+        print(kind.mime)
+        sound = AudioSegment.from_file(filename, format='mp3')
+    elif kind.mime == 'audio/x-wav':
+        print(kind.mime)
+        sound = AudioSegment.from_file(filename, format='wav')
+    elif kind.mime == 'audio/m4a':
+        print(kind.mime)
+        sound = AudioSegment.from_file(filename, format='mp4')
+    elif kind.mime == 'audio/x-flac':
+        print(kind.mime)
+        sound = AudioSegment.from_file(filename, format='flac')
+    else:
+        print('other filetype', kind.mime)
+        return
+    
+    if args.up != 0:
+        octaves = args.up / 12
+    elif args.down != 0:
+        octaves = - args.down / 12
+    else:
+        octaves = 0
+
+    new_sample_rate = int(sound.frame_rate * (2.0 ** octaves))
+    upsampled = sound._spawn(sound.raw_data, overrides={'frame_rate': new_sample_rate})
+    upsampled_sound = upsampled.set_frame_rate(44100)
+    upsampled_sound.export(filename + '.out.mp3', format='mp3')
+
+    print('written', filename+'.out.mp3')
+
+if __name__ == '__main__':
+    main()
