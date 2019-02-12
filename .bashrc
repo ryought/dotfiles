@@ -16,7 +16,7 @@ shopt -u histappend
 export PROMPT_COMMAND="history -a; history -c; history -r;"
 export HISTCONTROL=erasedups:ignoreboth
 export HISTSIZE=1000000
-export HISTIGNORE="history*:ls*:la*:fg*:bg*:vi"
+export HISTIGNORE="history*:fg*:bg*:vi"
 
 ## completion / plugin ##
 # z - cd fast with history
