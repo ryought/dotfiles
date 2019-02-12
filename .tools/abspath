@@ -1,0 +1,4 @@
+#!/bin/bash
+# vim: set ft=sh
+abspath=$(cd $(dirname $1) && pwd)/$(basename $1)
+echo $abspath
