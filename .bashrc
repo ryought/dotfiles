@@ -84,15 +84,22 @@ function cs() {
   ls
 }
 alias cs=cs
-
 if type "colordiff" > /dev/null 2>&1
 then
   alias diff='colordiff -u'
 else
   alias diff='diff -u'
 fi
-
 alias less='less -R'
+# parallel compression
+if type "pigz" > /dev/null 2>&1
+then
+  alias gzip='pigz'
+fi
+if type "pbzip2" > /dev/null 2>&1
+then
+  alias bzip2='pbzip2'
+fi
 
 ## editor ##
 export EDITOR=vim
