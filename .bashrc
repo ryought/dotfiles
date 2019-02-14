@@ -9,6 +9,8 @@ shopt -s nocaseglob  # 「*」などのパス名展開で大文字小文字を�
 shopt -s dirspell
 shopt -s globstar  # 「**」が使えるようになる
 
+export IGNOREEOF=100  # disable C-d for exiting bash
+
 ## history ##
 # sync history with multiple session
 # http://iandeth.dyndns.org/mt/ian/archives/000651.html
