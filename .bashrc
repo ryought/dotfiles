@@ -9,6 +9,8 @@ shopt -s nocaseglob  # 「*」などのパス名展開で大文字小文字を�
 shopt -s dirspell
 shopt -s globstar  # 「**」が使えるようになる
 
+export IGNOREEOF=100  # disable C-d for exiting bash
+
 ## history ##
 # sync history with multiple session
 # http://iandeth.dyndns.org/mt/ian/archives/000651.html
@@ -84,15 +86,22 @@ function cs() {
   ls
 }
 alias cs=cs
-
 if type "colordiff" > /dev/null 2>&1
 then
   alias diff='colordiff -u'
 else
   alias diff='diff -u'
 fi
-
 alias less='less -R'
+# parallel compression
+if type "pigz" > /dev/null 2>&1
+then
+  alias gzip='pigz'
+fi
+if type "pbzip2" > /dev/null 2>&1
+then
+  alias bzip2='pbzip2'
+fi
 
 ## editor ##
 export EDITOR=vim
