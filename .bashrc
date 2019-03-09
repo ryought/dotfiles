@@ -9,7 +9,7 @@ shopt -s nocaseglob  # 「*」などのパス名展開で大文字小文字を�
 shopt -s dirspell
 shopt -s globstar  # 「**」が使えるようになる
 
-export IGNOREEOF=100  # disable C-d for exiting bash
+export IGNOREEOF=1  # disable C-d for exiting bash
 
 ## history ##
 # sync history with multiple session
@@ -72,6 +72,9 @@ alias grep="grep --color"
 alias o="open ."
 alias vi="vim"
 alias c="clang++ -std=c++14 -Wall -g -fsanitize=undefined -D_GLIBCXX_DEBUG"
+alias g="git"
+alias gti="git"
+alias gt="git"
 
 cd () {
   # builtin cd -- "$@" && ls
