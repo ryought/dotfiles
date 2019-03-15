@@ -1,0 +1,25 @@
+#!/bin/bash
+# vim: set ft=bash
+export sec=0
+for arg in "$@"; do
+  if [[ "$arg" =~ ([0-9]+)([hms]) ]]; then
+    num=${BASH_REMATCH[1]}
+    unit=${BASH_REMATCH[2]}
+    case "$unit" in
+      h)
+        sec=$((sec += num * 3600))
+        ;;
+      m)
+        sec=$((sec += num * 60))
+        ;;
+      s)
+        sec=$((sec += num))
+        ;;
+    esac
+  elif [[ "$arg" =~ ([0-9]+) ]]; then
+    num=${BASH_REMATCH[1]}
+    sec=$((sec += num))
+  fi
+done
+
+sleep "$sec" && slackify "$sec sec passed" &
