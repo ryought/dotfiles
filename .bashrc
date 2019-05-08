@@ -4,12 +4,19 @@
 
 ## bash option ##
 shopt -s autocd
-shopt -s cdspell  # directory移動時の小さなtypoを修正
-shopt -s nocaseglob  # 「*」などのパス名展開で大文字小文字を区別しない
+shopt -s cdspell  # fix typo automatically when directory moving
+shopt -s nocaseglob
 shopt -s dirspell
-shopt -s globstar  # 「**」が使えるようになる
+shopt -s globstar  # enable "**"
 
+# C-d
 export IGNOREEOF=1  # disable C-d for exiting bash
+
+# C-s, C-q
+if [[ -t 0 ]]; then
+  stty stop undef  # disable C-s
+  stty start undef  # disable C-q
+fi
 
 ## history ##
 # sync history with multiple session
@@ -26,7 +33,7 @@ export HISTIGNORE="history*:fg*:bg*:vi"
 # fzf - fuzzy finder
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
-## command ##
+## direnv ##
 if type "direnv" > /dev/null 2>&1
 then
   eval "$(direnv hook bash)"
@@ -55,6 +62,7 @@ else
   PS1="\[\033[32m\](\t)\[\033[00m\] \[\033[01m\]\w\[\033[31;2m\]${git_prompt}\[\033[00m\] \\$ "
 fi
 
+## OS specific settings ##
 if [ "$(uname)" = 'Darwin' ]; then
   # macos
   export LSCOLORS=gxfxcxdxbxegedabagacad
@@ -67,7 +75,7 @@ else
   alias la="ls -la -h --color=auto"
 fi
 
-## alias ##
+## alias & custom commands ##
 alias grep="grep --color"
 alias o="open ."
 alias vi="vim"
@@ -75,20 +83,16 @@ alias c="clang++ -std=c++14 -Wall -g -fsanitize=undefined -D_GLIBCXX_DEBUG"
 alias g="git"
 alias gti="git"
 alias gt="git"
+alias l="less"
+alias L="less -S"
 
 cd () {
-  # builtin cd -- "$@" && ls
   builtin cd "$@" && ls
 }
 back () {
   cd --
 }
 
-function cs() {
-  \cd $1
-  ls
-}
-alias cs=cs
 if type "colordiff" > /dev/null 2>&1
 then
   alias diff='colordiff -u'
@@ -96,6 +100,7 @@ else
   alias diff='diff -u'
 fi
 alias less='less -R'
+
 # parallel compression
 if type "pigz" > /dev/null 2>&1
 then
@@ -115,6 +120,9 @@ export LANG=ja_JP.UTF-8
 
 ## my own tools
 PATH="$PATH:$HOME/.tools:$HOME/.tools-private/bin"
+
+## ruby
+PATH="/usr/local/opt/ruby/bin:$PATH"
 
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
@@ -153,8 +161,3 @@ fi
 # on vmware
 # export SVGA_VGPU10=0
 
-# C-s, C-q
-if [[ -t 0 ]]; then
-  stty stop undef  # disable C-s
-  stty start undef  # disable C-q fi
-fi

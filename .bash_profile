@@ -1,10 +1,5 @@
-# .bash_profile
-
-# login時に読み込まれる
-# path周りの設定だけここに、残りは.bashrcにかく
-
 #
-# path settings
+# .bash_profile for local mac
 #
 
 # homebrew
@@ -21,7 +16,6 @@ export PATH=$PATH:$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/platf
 export GOPATH=$HOME/src/go
 # mytools
 export PATH=$PATH:$HOME/src/dotfiles-private/tools
-
 
 #
 # env

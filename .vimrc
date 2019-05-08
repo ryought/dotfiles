@@ -42,7 +42,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
   Plug 'airblade/vim-gitgutter'
   Plug 'editorconfig/editorconfig-vim'  " editorconfig
   Plug 'rust-lang/rust.vim'  " rust
-  Plug 'JuliaEditorSupport/julia-vim' " julia
+  " Plug 'JuliaEditorSupport/julia-vim' " julia
   if has('mac')
     Plug '/usr/local/opt/fzf'
   else
@@ -146,6 +146,8 @@ inoremap <C-b> <C-o>b
 inoremap <C-d> <C-o>x
 cnoremap <c-n>  <down>
 cnoremap <c-p>  <up>
+" remove search highlight
+nmap <ESC><ESC> :noh<CR>
 
 " 前回のカーソル位置を記憶
 " autocmd BufWinLeave ?* silent mkview
@@ -291,7 +293,7 @@ nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 let g:ale_linters = {
       \ 'javascript': ['eslint'],
-      \ 'python': ['flake8', 'pyflakes'],
+      \ 'python': ['flake8', 'pyflakes', 'mypy'],
       \ 'cpp': ['clang'],
       \ 'c': ['clang'],
       \ 'rust': ['cargo'],

@@ -20,7 +20,10 @@ def main():
 
     kind = filetype.guess(filename)
     if kind is None:
-        return
+        print('cannot guess filetype')
+        # return
+        # print(kind.mime)
+        # sound = AudioSegment.from_file(filename, format='mp4')
     elif kind.mime == 'audio/mpeg':
         print(kind.mime)
         sound = AudioSegment.from_file(filename, format='mp3')
