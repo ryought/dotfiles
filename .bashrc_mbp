@@ -1,0 +1,18 @@
+#
+# local mbp settings
+#
+
+# anaconda and homebrew
+export PATH=/usr/local/anaconda3/bin:$PATH:/usr/local/bin
+# my tools
+export PATH="$PATH:$HOME/.tools:$HOME/.tools-private/bin"
+
+# android
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
+
+export GOPATH=$HOME/src/go
+
+# use ruby installed from homebrew
+export PATH="/usr/local/opt/ruby/bin:$PATH"
+

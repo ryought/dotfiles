@@ -32,6 +32,13 @@ export HISTIGNORE="history*:fg*:bg*:vi"
 [ -f /usr/local/etc/profile.d/z.sh ] && . /usr/local/etc/profile.d/z.sh
 # fzf - fuzzy finder
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+# serverless - AWS lambda
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash ] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash ] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash
 
 ## direnv ##
 if type "direnv" > /dev/null 2>&1
@@ -42,16 +49,16 @@ fi
 ## prompt ##
 # show git branches
 if type __git_ps1 > /dev/null 2>&1 ; then
-  GIT_PS1_SHOWDIRTYSTATE=1  # unstagedがある*  stagedがある+
-  GIT_PS1_SHOWSTASHSTATE=1  # stashに何か入っている $
-  GIT_PS1_SHOWUNTRACKEDFILES=1  # untrackedファイルがある %
-  GIT_PS1_SHOWUPSTREAM=  # upstreamより遅れているか
+  GIT_PS1_SHOWDIRTYSTATE=1  # unstaged:*  staged:+
+  GIT_PS1_SHOWSTASHSTATE=1  # :$
+  GIT_PS1_SHOWUNTRACKEDFILES=1  # :%
+  GIT_PS1_SHOWUPSTREAM=
   GIT_PS1_SHOWCOLORHINTS=1
   git_prompt='$(__git_ps1)'
 fi
 # prompt definition
 export PROMPT_DIRTRIM=3  # trim path longer than 3
-if [ -n "$SSH_CLIENT" ] || [ $HOSTNAME != 'ryought-mbp.local' ]; then
+if [[ "${SSH_TTY}" ]]; then
   # ssh
   PS1="\[\033[33m\](\t) \[\033[37m\033[41m\] \u@\h \[\033[00m\] \[\033[01m\]\w\[\033[31;2m\]${git_prompt}\[\033[00m\] \\$ "
 elif [ $UID -eq 0 ]; then
@@ -115,49 +122,16 @@ fi
 export EDITOR=vim
 export LANG=ja_JP.UTF-8
 
-## .inputrc ##
+## load other files ##
+# .inputrc
 [ -f ~/.inputrc ] && bind -f ~/.inputrc
-
-## my own tools
-PATH="$PATH:$HOME/.tools:$HOME/.tools-private/bin"
-
-## ruby
-PATH="/usr/local/opt/ruby/bin:$PATH"
-
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash ] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/serverless.bash
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash ] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash
-
-# on hx cluster
-# anaconda
-if [ -d "$HOME/work/tools/anaconda3" ]; then
-  __conda_setup="$(CONDA_REPORT_ERRORS=false '$HOME/work/tools/anaconda3/bin/conda' shell.bash hook 2> /dev/null)"
-  if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-  else
-    if [ -f "$HOME/work/tools/anaconda3/etc/profile.d/conda.sh" ]; then
-      . "$HOME/work/tools/anaconda3/etc/profile.d/conda.sh"
-      CONDA_CHANGEPS1=false conda activate base
-    else
-      export PATH="$HOME/work/tools/anaconda3/bin:$PATH"
-    fi
+# .bashrc_*: machine dependent settings
+for file in ~/.bashrc_*;
+do
+  if [[ -r "$file" ]] && [[ -f "$file" ]]; then
+    echo 'loaded' $file
+    source $file
   fi
-  unset __conda_setup
-  export PATH="$HOME/work/tools/anaconda3/bin:$PATH:$HOME/work/local/bin"
-  export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$HOME/work/local/lib"
-
-  # qtop, to avoid inconsistent perl version error
-  alias qtop='PATH=/bio/bin:/usr/local/bin:/bin:/usr/bin:/grid/sgeadmin/bin/lx24-amd64 qtop'
-fi
-
-# on ubuntu with ROS
-if [ -e "/opt/ros/kinetic/setup.bash" ]; then
-  .  /opt/ros/kinetic/setup.bash
-fi
-
-# on vmware
-# export SVGA_VGPU10=0
+done
+unset file
 
