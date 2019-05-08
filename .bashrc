@@ -133,7 +133,6 @@ export PATH="$PATH:$HOME/.tools:$HOME/.tools-private/bin"
 for file in ~/.bashrc_*;
 do
   if [[ -r "$file" ]] && [[ -f "$file" ]]; then
-    echo 'loaded' $file
     source $file
   fi
 done
