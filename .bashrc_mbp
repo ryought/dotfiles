@@ -4,8 +4,6 @@
 
 # anaconda and homebrew
 export PATH=/usr/local/anaconda3/bin:$PATH:/usr/local/bin
-# my tools
-export PATH="$PATH:$HOME/.tools:$HOME/.tools-private/bin"
 
 # android
 export ANDROID_HOME=$HOME/Library/Android/sdk

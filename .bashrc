@@ -122,6 +122,10 @@ fi
 export EDITOR=vim
 export LANG=ja_JP.UTF-8
 
+## global PATH setting ##
+# for my tools
+export PATH="$PATH:$HOME/.tools:$HOME/.tools-private/bin"
+
 ## load other files ##
 # .inputrc
 [ -f ~/.inputrc ] && bind -f ~/.inputrc
