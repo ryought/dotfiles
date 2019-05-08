@@ -8,6 +8,10 @@ endif
 
 " ============= PLUGINS ===================
 " package manager: plug.vim
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
 "  to install, run below
 " $ curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 if filereadable(expand('~/.vim/autoload/plug.vim'))
@@ -117,6 +121,10 @@ set hlsearch  "結果をハイライト
 set completeopt=menuone,preview  " 候補が一つでも表示，プレビューウィンドウ使う
 set infercase  " 補完時に大文字小文字を無視(set ignorecaseに依存)
 set previewheight=6  " preview windowの最大高さ
+
+"""" Mouse
+set mouse=a
+set ttymouse=xterm2
 
 """" Key Mapping
 let mapleader = "\<Space>"
