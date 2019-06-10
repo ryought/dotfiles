@@ -92,6 +92,7 @@ alias gti="git"
 alias gt="git"
 alias l="less"
 alias L="less -S"
+alias p="papier"
 
 cd () {
   builtin cd "$@" && ls

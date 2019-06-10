@@ -41,10 +41,12 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
   Plug 'Quramy/tsuquyomi'  " typescript IDE, client of TSServer
   " python
   Plug 'davidhalter/jedi-vim'  " python completion こっちの方が良さげ
-  Plug 'dag/vim2hs'  " haskell
+  " haskell
+  Plug 'dag/vim2hs'
   Plug 'tpope/vim-fugitive'  " git plugin
   Plug 'airblade/vim-gitgutter'
   Plug 'editorconfig/editorconfig-vim'  " editorconfig
+  " rust
   Plug 'rust-lang/rust.vim'  " rust
   " Plug 'JuliaEditorSupport/julia-vim' " julia
   if has('mac')
@@ -123,8 +125,8 @@ set infercase  " 補完時に大文字小文字を無視(set ignorecaseに依存
 set previewheight=6  " preview windowの最大高さ
 
 """" Mouse
-set mouse=a
-set ttymouse=xterm2
+" set mouse=a
+" set ttymouse=xterm2
 
 """" Key Mapping
 let mapleader = "\<Space>"

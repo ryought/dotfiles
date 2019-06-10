@@ -5,6 +5,9 @@
 # anaconda and homebrew
 export PATH=/usr/local/anaconda3/bin:$PATH:/usr/local/bin
 
+# haskell stack
+# export PATH=$PATH:$HOME/.local/bin
+
 # android
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
@@ -14,3 +17,8 @@ export GOPATH=$HOME/src/go
 # use ruby installed from homebrew
 export PATH="/usr/local/opt/ruby/bin:$PATH"
 
+# rust
+export PATH="$HOME/.cargo/bin:$PATH"
+
+# custom install path
+export PATH=$PATH:$HOME/local/bin

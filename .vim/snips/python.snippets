@@ -567,3 +567,19 @@ snippet add_axis "add axis to np array"
 a = np.zeros((10,10))
 a[np.newaxis, np.newaxis, :, :].shape # -> (1,1,10,10)
 endsnippet
+
+snippet setuppy "setup.py"
+# then run: pip install -e .
+from setuptools import setup
+
+setup(
+        name="papier",
+        version="0.0.1",
+        install_requires=["iterfzf", "python-editor"],
+        entry_points={
+            "console_scripts": [
+                "papier = main:main"
+                ]
+            }
+        )
+endsnippet
