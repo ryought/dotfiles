@@ -93,6 +93,7 @@ alias gt="git"
 alias l="less"
 alias L="less -S"
 alias p="papier"
+alias fetchx="scp mlab.hx02:"
 
 cd () {
   builtin cd "$@" && ls

@@ -27,6 +27,8 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
 
   Plug 'luochen1990/rainbow'
   Plug 'Yggdroot/indentLine'
+  " json
+  Plug 'elzr/vim-json'
   " color-scheme
   Plug 'morhetz/gruvbox'
 
@@ -272,6 +274,9 @@ let g:rainbow_conf = {
 inoremap {<CR> {<CR>}<C-o>O
 
 " C
+
+" Json
+let g:vim_json_syntax_conceal = 0
 
 " markdown tex
 let g:vim_markdown_conceal = 0
