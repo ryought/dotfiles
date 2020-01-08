@@ -123,6 +123,10 @@ set smartindent
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
+" show tabs
+set list
+set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%
+" set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
 
 """" Folding
 set nofoldenable  " disable all folding

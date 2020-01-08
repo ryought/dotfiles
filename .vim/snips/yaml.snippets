@@ -1,0 +1,20 @@
+snippet serverless
+service: alexa-skill-shiritori2
+functions:
+  alexa:
+    handler: handler.alexa
+    timeout: 10
+    events:
+      - alexaSkill: ${file(./variables/${self:provider.stage}.yml):alexaApplicationId}
+  dailyRankingSlack:
+    handler: handlerDailyRanking.handler
+    timeout: 10
+    events:
+      - schedule: cron(0 1 * * ? *)
+      - http: GET slack
+  dailyRankingApi:
+    handler: handlerDailyRanking.apiHandler
+    timeout: 10
+    events:
+      - http: GET ranking
+endsnippet
