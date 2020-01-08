@@ -24,15 +24,22 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
   Plug 'ntpeters/vim-better-whitespace'
   Plug 'tmhedberg/matchit'  " html tag % matching
   Plug 'tpope/vim-surround'  " surrounding pattern
+
+  Plug 'luochen1990/rainbow'
+  Plug 'Yggdroot/indentLine'
+  " json
+  Plug 'elzr/vim-json'
   " color-scheme
   Plug 'morhetz/gruvbox'
+
   " syntax check, lint
   Plug 'w0rp/ale'
   " go
   Plug 'vim-jp/vim-go-extra' , { 'for': 'go' }
   Plug 'fatih/vim-go' , { 'for': 'go', 'do': ':GoInstallBinaries' }
   Plug 'posva/vim-vue', { 'for': 'vue' }
-  Plug 'godlygeek/tabular'  " align text `:Tab /=`
+  " Plug 'godlygeek/tabular'  " align text `:Tab /=`
+  Plug 'junegunn/vim-easy-align'
   Plug 'plasticboy/vim-markdown'
   " js, ts
   Plug 'pangloss/vim-javascript'
@@ -41,10 +48,12 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
   Plug 'Quramy/tsuquyomi'  " typescript IDE, client of TSServer
   " python
   " Plug 'davidhalter/jedi-vim'  " python completion こっちの方が良さげ
-  Plug 'dag/vim2hs'  " haskell
+  " haskell
+  Plug 'dag/vim2hs'
   Plug 'tpope/vim-fugitive'  " git plugin
   Plug 'airblade/vim-gitgutter'
   Plug 'editorconfig/editorconfig-vim'  " editorconfig
+  " rust
   Plug 'rust-lang/rust.vim'  " rust
   " Plug 'JuliaEditorSupport/julia-vim' " julia
   if has('mac')
@@ -55,7 +64,6 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
   Plug 'junegunn/fzf.vim'
   call plug#end()
 endif
-
 
 " ============= SETTINGS ==================
 " 必須系
@@ -76,6 +84,12 @@ set nobackup  "バックアップ
 set noswapfile "スワップ
 set viminfo+=n~/.vim/viminfo
 
+" enable persistent-undo feature
+if has('persistent_undo')
+  set undodir=~/.vim/undo
+  set undofile
+endif
+
 """" Appearances
 set ruler  " カーソル何行目何列目にあるか表示
 " set cursorline  " カーソル位置表示 重いのでoff
@@ -88,7 +102,9 @@ set wildmenu wildmode=list:longest
 set whichwrap=h,l " 行頭行末の移動で前後の行に飛ばないようにする
 set background=dark
 try
+  set background=dark
   colorscheme gruvbox
+
 catch /^Vim\%((\a\+)\)\=:E185/
 endtry
 
@@ -107,6 +123,10 @@ set smartindent
 set tabstop=2
 set shiftwidth=2
 set softtabstop=2
+" show tabs
+set list
+set listchars=tab:»-,trail:-,extends:»,precedes:«,nbsp:%
+" set listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
 
 """" Folding
 set nofoldenable  " disable all folding
@@ -123,8 +143,8 @@ set infercase  " 補完時に大文字小文字を無視(set ignorecaseに依存
 set previewheight=6  " preview windowの最大高さ
 
 """" Mouse
-set mouse=a
-set ttymouse=xterm2
+" set mouse=a
+" set ttymouse=xterm2
 
 """" Key Mapping
 let mapleader = "\<Space>"
@@ -156,6 +176,11 @@ cnoremap <c-n>  <down>
 cnoremap <c-p>  <up>
 " remove search highlight
 nmap <ESC><ESC> :noh<CR>
+" pane moving
+map sj <C-w>j
+map sk <C-w>k
+map sl <C-w>l
+map sh <C-w>h
 
 " 前回のカーソル位置を記憶
 " autocmd BufWinLeave ?* silent mkview
@@ -214,10 +239,9 @@ let g:UltiSnipsSnippetsDir="~/.vim/snips"
 let g:UltiSnipsSnippetDirectories=["snips"]
 nnoremap <Leader>e :UltiSnipsEdit<CR>
 
-" easy-align
+" easy-align: add operator `ga`
 xmap ga <Plug>(EasyAlign)
 nmap ga <Plug>(EasyAlign)
-
 
 " editorconfig
 let g:EditorConfig_exclude_patterns = ['fugitive://.*']
@@ -237,14 +261,30 @@ let g:gitgutter_sign_modified = '∙'
 let g:gitgutter_sign_removed = '∙'
 let g:gitgutter_sign_modified_removed = '∙'
 
+" indent line
+let g:indentLine_char_list = ['|', '¦']
+" rainbow
+let g:rainbow_active = 1
+let g:rainbow_conf = {
+      \	'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
+      \ 'separately': {
+      \   'html': 'default',
+      \   '*': 0
+      \ }
+      \}
+
 " === language specific ===================
 " { completion
 inoremap {<CR> {<CR>}<C-o>O
 
 " C
 
+" Json
+let g:vim_json_syntax_conceal = 0
+
 " markdown tex
-let g:tex_conceal = ""
+let g:vim_markdown_conceal = 0
+let g:tex_conceal = 0
 let g:vim_markdown_math = 1
 let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_no_extensions_in_markdown = 1
@@ -331,3 +371,4 @@ autocmd FileType vue syntax sync fromstart
 
 " lisp
 let g:lisp_rainbow = 1
+

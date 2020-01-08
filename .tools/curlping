@@ -1,0 +1,7 @@
+#!/bin/bash
+# vim: set ft=sh
+while true
+do
+  curl -LI $1 -o /dev/null -w 'code: %{http_code}, time total: %{time_total}\n' -s
+  sleep 3
+done
