@@ -32,10 +32,15 @@ export PATH="/work/ryought/tools/anaconda3/bin:$PATH"
 
 ## custom binary path ##
 export PATH="$PATH:$HOME/work/local/bin"
-export LD_LIBRARY_PATH="$LD_LIBRARY_PATH:$HOME/work/local/lib"
+export LD_LIBRARY_PATH="/bio/lib:$LD_LIBRARY_PATH:$HOME/work/local/lib"
 
 export PATH="$PATH:/usr/local/bin"
 
 # vim
 export PATH="$HOME/work/tools/vim/bin:$PATH"
 
+# rust
+export PATH="$HOME/.cargo/bin:$PATH"
+
+# mummer plot tool
+alias mummerplot='PERL5LIB=/work/ryought/tools/anaconda3/lib/ mummerplot'

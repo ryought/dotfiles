@@ -40,7 +40,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
   Plug 'leafgarland/typescript-vim'  " typescript syntax highlighting
   Plug 'Quramy/tsuquyomi'  " typescript IDE, client of TSServer
   " python
-  Plug 'davidhalter/jedi-vim'  " python completion こっちの方が良さげ
+  " Plug 'davidhalter/jedi-vim'  " python completion こっちの方が良さげ
   Plug 'dag/vim2hs'  " haskell
   Plug 'tpope/vim-fugitive'  " git plugin
   Plug 'airblade/vim-gitgutter'
@@ -301,7 +301,7 @@ nmap <silent> <C-k> <Plug>(ale_previous_wrap)
 nmap <silent> <C-j> <Plug>(ale_next_wrap)
 let g:ale_linters = {
       \ 'javascript': ['eslint'],
-      \ 'python': ['flake8', 'pyflakes', 'mypy'],
+      \ 'python': ['pyflakes'],
       \ 'cpp': ['clang'],
       \ 'c': ['clang'],
       \ 'rust': ['cargo'],
