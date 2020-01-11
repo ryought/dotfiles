@@ -583,3 +583,40 @@ setup(
             }
         )
 endsnippet
+
+
+snippet doctest "simple example of doctest"
+def test(x):
+    """
+    Usage:
+    >>> x = 100
+    >>> test(x)
+    101
+
+    Raise error when x == 10:
+    >>> y = 10
+    >>> print(x)  # variables are globaly shared within a file
+    100
+    >>> test(y)
+    Traceback (most recent call last):
+        ...
+    KeyError
+
+    >>> x = [
+    ... 0,
+    ... 1,
+    ... 2,
+    ... ]
+    >>> x[0] == 0
+    True
+    """
+    if x == 10:
+        raise KeyError()
+    else:
+        return 101
+
+if __name__ == '__main__':
+    import doctest
+    doctest.testmod()
+# run python this_script.py to see the test results
+endsnippet
