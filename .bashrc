@@ -141,3 +141,15 @@ do
 done
 unset file
 
+# nvm
+export NVM_DIR="$HOME/.nvm"
+# delay loading functions
+function nvm () {
+  if type 'nvm' > /dev/null 2>&1
+  then
+    echo 'loading nvm'
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+  fi
+  nvm $@
+}
