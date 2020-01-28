@@ -44,3 +44,6 @@ export PATH="$HOME/.cargo/bin:$PATH"
 
 # mummer plot tool
 alias mummerplot='PERL5LIB=/work/ryought/tools/anaconda3/lib/ mummerplot'
+
+# activate z
+[ -f "$HOME/z.sh" ] && . $HOME/z.sh
