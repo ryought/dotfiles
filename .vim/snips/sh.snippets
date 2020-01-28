@@ -219,3 +219,17 @@ endsnippet
 snippet stderrtee "tee-ing stdout and stderr"
 2>&1 | tee <output filename>
 endsnippet
+
+snippet sge "sun grid engine qsub scripts"
+#$ -S /bin/bash
+#$ -N <name of job>
+#$ -cwd
+#$ -V
+#$ -e ./log
+#$ -o ./out
+#$ -j y
+#$ -m e
+#$ -M ryonakabayashi@gmail.com
+#$ -pe smp <number of core>
+#$ -l mem_free=450GB
+endsnippet

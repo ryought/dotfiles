@@ -45,23 +45,48 @@ if __name__ == '__main__':
 endsnippet
 
 snippet """ "docstring"
-"""${1:desctiption}
+"""short description
 
-${2:This is a longer explanation.}
+description in detail
 
-- parameters
-- hogehoge
+Parameters
+----------
+param1 : int
+    The first parameter.
+param2 : list of str
+    The second parameter.
 
-:param ${3:arg1}: ${4:the first value}
-:param arg2: hoge
-:returns: ${5:hoge}
-:rtype: ${6:str}
+Returns
+-------
+bool
+    True if successful, False otherwise.
+int
+    the count of trial
 
-:Example:
+Raises
+------
+ValueError
+    If `param2` is equal to `param1`.
 
->>> ${7:import hoge}
->>> hoge.hoge
-2
+Examples
+--------
+Examples should be written in doctest format, and should illustrate how
+to use the function.
+
+>>> print([i for i in example_generator(4)])
+[0, 1, 2, 3]
+
+Second Example
+
+>>> print('hoge')
+hoge
+
+Attributes
+----------
+attr1 : str
+    Description of `attr1`.
+attr2 : int, optional
+    Description of `attr2`.
 """
 endsnippet
 
@@ -192,12 +217,18 @@ endsnippet
 snippet numpy "import numpy"
 import numpy as np
 import matplotlib.pyplot as plt
+import pandas as pd
 endsnippet
 
 snippet open "file open"
 with open('.txt', 'rt') as f:
     for line in f:
 	print(line)
+
+with open(assembly_filename) as f:
+		for line in f:
+				if line[0] == '>':
+						record = line[1:].rstrip('\n').split(' ')
 endsnippet
 
 snippet printoption "supress and format number printing"
