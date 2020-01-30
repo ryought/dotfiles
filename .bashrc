@@ -130,8 +130,6 @@ export LANG=ja_JP.UTF-8
 export PATH="$PATH:$HOME/.tools:$HOME/.tools-private/bin"
 
 ## load other files ##
-# .inputrc
-[ -f ~/.inputrc ] && bind -f ~/.inputrc
 # .bashrc_*: machine dependent settings
 for file in ~/.bashrc_*;
 do
