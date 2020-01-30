@@ -225,11 +225,12 @@ snippet sge "sun grid engine qsub scripts"
 #$ -N <name of job>
 #$ -cwd
 #$ -V
-#$ -e ./log
-#$ -o ./out
+#$ -o ./<name of logfile>
 #$ -j y
 #$ -m e
 #$ -M ryonakabayashi@gmail.com
 #$ -pe smp <number of core>
 #$ -l mem_free=450GB
+date
+slackify 'SGE job finished'
 endsnippet
