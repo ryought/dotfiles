@@ -86,6 +86,7 @@ fi
 alias grep="grep --color"
 alias o="open ."
 alias vi="vim"
+alias v="vim"
 alias c="clang++ -std=c++14 -Wall -g -fsanitize=undefined -D_GLIBCXX_DEBUG"
 alias g="git"
 alias gti="git"
@@ -109,7 +110,8 @@ then
 else
   alias diff='diff -u'
 fi
-alias less='less -R'
+
+export LESS='-R -m'
 
 # parallel compression
 if type "pigz" > /dev/null 2>&1

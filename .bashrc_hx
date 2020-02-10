@@ -4,6 +4,7 @@
 ## Aliases ##
 # qtop, to avoid inconsistent perl version error
 alias qtop='PATH=/bio/bin:/usr/local/bin:/bin:/usr/bin:/grid/sgeadmin/bin/lx24-amd64 qtop'
+alias any2fasta='PATH=/bio/bin:/usr/local/bin:/bin:/usr/bin:/grid/sgeadmin/bin/lx24-amd64:/work/ryought/local/bin any2fasta'
 
 
 ## Anaconda ##
@@ -31,7 +32,7 @@ export PATH="/work/ryought/tools/anaconda3/bin:$PATH"
 
 
 ## custom binary path ##
-export PATH="$PATH:$HOME/work/local/bin"
+export PATH="$HOME/work/local/bin:$PATH"
 export LD_LIBRARY_PATH="/bio/lib:$LD_LIBRARY_PATH:$HOME/work/local/lib"
 
 export PATH="$PATH:/usr/local/bin"
