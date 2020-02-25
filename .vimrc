@@ -19,7 +19,15 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
   Plug 'ctrlpvim/ctrlp.vim'  " fuzzy file finder
   Plug 'lokikl/vim-ctrlp-ag'
   Plug 'mileszs/ack.vim'
-  Plug 'SirVer/ultisnips'  " snippet
+  " snippet engine
+  if has('python3')
+    Plug 'SirVer/ultisnips'
+  elseif has('python')
+    Plug 'SirVer/ultisnips', {
+          \   'tag': '3.2',
+          \   'dir': get(g:, 'plug_home', '~/.vim/bundle') . '/ultisnips_py2',
+          \ }
+  endif
   Plug 'tpope/vim-commentary'  " gc commentize
   Plug 'ntpeters/vim-better-whitespace'
   Plug 'tmhedberg/matchit'  " html tag % matching
@@ -62,6 +70,8 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
     Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
   endif
   Plug 'junegunn/fzf.vim'
+  " singularity
+  Plug 'singularityware/singularity.lang', {'rtp': 'vim/'}
   call plug#end()
 endif
 
