@@ -147,6 +147,10 @@ for line in sys.stdin:
 # or
 import pandas as pd
 x = pd.read_table(path, usecols=[0,1,2])
+# or
+import csv
+with open('hoge.csv', 'r') as f:
+    reader = csv.reader(f)
 endsnippet
 
 snippet test "pytest template"
@@ -650,4 +654,12 @@ if __name__ == '__main__':
     import doctest
     doctest.testmod()
 # run python this_script.py to see the test results
+endsnippet
+
+snippet pysam "read from stdin"
+import pysam
+infile = pysam.AlignmentFile("-", "r")
+for r in infile:
+    print(r)
+    print(r.reference_name, r.reference_start, r.query_name, r.mapping_quality, r.is_reverse)
 endsnippet

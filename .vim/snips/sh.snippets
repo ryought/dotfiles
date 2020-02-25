@@ -9,6 +9,10 @@ snippet #! "shebang" b
 #!/bin/bash
 set -Ceuo pipefail
 cd $(dirname \$0)
+
+# arguments check
+[ $# -ne 1 ] && echo 'not enough arguments' && exit 1
+fasta=$1
 endsnippet
 
 snippet #!h "shebang with help" b
@@ -24,6 +28,8 @@ endsnippet
 
 snippet forloop "for loop"
 for i in `seq 1 10`
+# or:
+# for i in $(seq 1 5)
 do
   test $n 2 10
 	for n in 1000 10000 100000
@@ -51,6 +57,8 @@ if [ ! -r $FILE ]; then
   echo 'cannot read file'
   exit 1
 fi
+
+[ ! -f $scaf_chunk ] && echo "generating scaf chunk $scaf_chunk"
 endsnippet
 
 snippet ifelse "if statement"
@@ -222,15 +230,52 @@ endsnippet
 
 snippet sge "sun grid engine qsub scripts"
 #$ -S /bin/bash
-#$ -N <name of job>
+#$ -N arrjob
 #$ -cwd
 #$ -V
-#$ -o ./<name of logfile>
+#$ -o ./out
 #$ -j y
 #$ -m e
 #$ -M ryonakabayashi@gmail.com
-#$ -pe smp <number of core>
-#$ -l mem_free=450GB
-date
-slackify 'SGE job finished'
+#$ -pe smp 1
+#$ -l mem_free=1GB
+#$ -t 1:12
+{
+  date
+  echo "this is ${SGE_TASK_ID}"
+  slackify "job $REQUEST finished"
+} &> hoge.${SGE_TASK_ID}.log
+endsnippet
+
+snippet yq "yaml query example"
+# usual access
+f=$(yq -er ".files.id1" << EOS
+files:
+  id1: hogehoge
+  id200: asksja
+EOS
+)
+echo $f
+
+# filter by key
+yq -er '.keys[] | select(.key == "hoge") | .data' << EOS
+keys:
+  - key: "hoge"
+    data: 1021
+  - key: "fuga"
+    data: 100302
+EOS
+
+# iterate over keys
+for key in $(yq -er ".keys[].key" << EOS
+keys:
+  - key: "hoge"
+    data: 1021
+  - key: "fuga"
+    data: 100302
+EOS
+)
+do
+  echo "key is $key"
+done
 endsnippet
