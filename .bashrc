@@ -93,7 +93,7 @@ alias gti="git"
 alias gt="git"
 alias l="less"
 alias L="less -S"
-alias p="papier"
+alias t="tmux save-buffer -"
 function fetchx () {
   command scp mlab.hx01:$1 $2
 }

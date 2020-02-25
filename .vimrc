@@ -159,10 +159,10 @@ set previewheight=6  " preview windowの最大高さ
 """" Key Mapping
 let mapleader = "\<Space>"
 " viminfoを保存、共有する
-nnoremap <Leader>w :wv<CR>
-nnoremap <Leader>r :rv!<CR>
+" nnoremap <Leader>s :wv<CR>
+" nnoremap <Leader>r :rv!<CR>
 " register一覧を表示
-nmap <Leader>l :reg<CR>
+nmap <Leader>r :reg<CR>
 " mark一覧を表示
 nmap <Leader>m :marks<CR>
 " コピー
@@ -170,6 +170,7 @@ nmap <Leader>y "+y
 nmap <Leader>d "+d
 vmap <Leader>y "+y
 vmap <Leader>d "+d
+nmap <Leader>t :r !tmux save-buffer -<CR>
 " 全文コピー
 nmap <Leader>Y gg"+yG
 " ペースト
