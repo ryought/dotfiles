@@ -50,12 +50,13 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
   Plug 'junegunn/vim-easy-align'
   Plug 'plasticboy/vim-markdown'
   " js, ts
-  Plug 'pangloss/vim-javascript'
+  Plug 'yuezk/vim-js'
   Plug 'maxmellon/vim-jsx-pretty', { 'for': ['vue', 'jsx'] }
   Plug 'leafgarland/typescript-vim'  " typescript syntax highlighting
   Plug 'Quramy/tsuquyomi'  " typescript IDE, client of TSServer
   " python
-  " Plug 'davidhalter/jedi-vim'  " python completion こっちの方が良さげ
+  Plug 'Vimjas/vim-python-pep8-indent'
+  Plug 'davidhalter/jedi-vim'  " python completion こっちの方が良さげ
   " haskell
   Plug 'dag/vim2hs'
   Plug 'tpope/vim-fugitive'  " git plugin
@@ -298,6 +299,7 @@ let g:vim_markdown_conceal = 0
 let g:tex_conceal = 0
 let g:vim_markdown_math = 1
 let g:vim_markdown_folding_disabled = 1
+let g:vim_markdown_conceal_code_blocks = 0
 let g:vim_markdown_no_extensions_in_markdown = 1
 let g:vim_markdown_autowrite = 1
 autocmd BufNewFile,BufRead *.md setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
