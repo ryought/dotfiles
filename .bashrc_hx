@@ -34,11 +34,7 @@ export PATH="/work/ryought/tools/anaconda3/bin:$PATH"
 ## custom binary path ##
 export PATH="$HOME/work/local/bin:$PATH"
 export LD_LIBRARY_PATH="/bio/lib:$LD_LIBRARY_PATH:$HOME/work/local/lib"
-
-export PATH="$PATH:/usr/local/bin"
-
-# vim
-export PATH="$HOME/work/tools/vim/bin:$PATH"
+export PATH="$PATH:/usr/local/bin:$HOME/.local/bin"
 
 # rust
 export PATH="$HOME/.cargo/bin:$PATH"
@@ -48,3 +44,20 @@ alias mummerplot='PERL5LIB=/work/ryought/tools/anaconda3/lib/ mummerplot'
 
 # activate z
 [ -f "$HOME/z.sh" ] && . $HOME/z.sh
+
+# Juicebox over vnc
+alias juicebox='ssh -L 8786:ax01:5901 ax01 -t "PATH=/bio/bin:/usr/local/bin:/bin:/usr/bin:/grid/sgeadmin/bin/lx24-amd64 vncserver -geometry 1440x900 -fg & DISPLAY=:1 java -jar /work/ryought/tools/Juicebox_1.9.8.jar"'
+alias gepard='ssh -L 8786:ax01:5901 ax01 -t "PATH=/bio/bin:/usr/local/bin:/bin:/usr/bin:/grid/sgeadmin/bin/lx24-amd64 vncserver -geometry 1440x900 -fg & DISPLAY=:1 java -jar /work/ryought/tools/Gepard-1.40.jar"'
+
+# # ssh-agent config
+# agent="$HOME/.ssh/agent"
+# if [ -S "$SSH_AUTH_SOCK" ]; then
+#   case $SSH_AUTH_SOCK in
+#   /tmp/*/agent.[0-9]*)
+#     ln -snf "$SSH_AUTH_SOCK" $agent && export SSH_AUTH_SOCK=$agent
+#   esac
+# elif [ -S $agent ]; then
+#   export SSH_AUTH_SOCK=$agent
+# else
+#   echo "no ssh-agent"
+# fi
