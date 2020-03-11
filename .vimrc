@@ -16,9 +16,18 @@ endif
 " $ curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 if filereadable(expand('~/.vim/autoload/plug.vim'))
   call plug#begin('~/.vim/plugged')
+  "------ essentials --------------
+  " file search commands
   Plug 'ctrlpvim/ctrlp.vim'  " fuzzy file finder
-  Plug 'lokikl/vim-ctrlp-ag'
+  Plug 'lokikl/vim-ctrlp-ag'  " ag
   Plug 'mileszs/ack.vim'
+  " fzf
+  if has('mac')
+    Plug '/usr/local/opt/fzf'
+  else
+    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  endif
+  Plug 'junegunn/fzf.vim'
   " snippet engine
   if has('python3')
     Plug 'SirVer/ultisnips'
@@ -28,49 +37,49 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
           \   'dir': get(g:, 'plug_home', '~/.vim/bundle') . '/ultisnips_py2',
           \ }
   endif
+  " extend commands
   Plug 'tpope/vim-commentary'  " gc commentize
   Plug 'ntpeters/vim-better-whitespace'
   Plug 'tmhedberg/matchit'  " html tag % matching
   Plug 'tpope/vim-surround'  " surrounding pattern
-
-  Plug 'luochen1990/rainbow'
+  Plug 'junegunn/vim-easy-align'  " align
+  " enhance visual
+  Plug 'luochen1990/rainbow'  " rainbow parenthes
   Plug 'Yggdroot/indentLine'
-  " json
-  Plug 'elzr/vim-json'
   " color-scheme
   Plug 'morhetz/gruvbox'
 
+  "------ git --------------
+  Plug 'tpope/vim-fugitive'  " git plugin
+  Plug 'airblade/vim-gitgutter'
+  Plug 'editorconfig/editorconfig-vim'  " editorconfig
+
+  "------ language --------------
   " syntax check, lint
   Plug 'w0rp/ale'
   " go
   Plug 'vim-jp/vim-go-extra' , { 'for': 'go' }
   Plug 'fatih/vim-go' , { 'for': 'go', 'do': ':GoInstallBinaries' }
-  Plug 'posva/vim-vue', { 'for': 'vue' }
-  " Plug 'godlygeek/tabular'  " align text `:Tab /=`
-  Plug 'junegunn/vim-easy-align'
   Plug 'plasticboy/vim-markdown'
-  " js, ts
+  " js, ts, jsx
   Plug 'yuezk/vim-js'
-  Plug 'maxmellon/vim-jsx-pretty', { 'for': ['vue', 'jsx'] }
-  Plug 'leafgarland/typescript-vim'  " typescript syntax highlighting
-  Plug 'Quramy/tsuquyomi'  " typescript IDE, client of TSServer
+  Plug 'HerringtonDarkholme/yats.vim'  " typescript?
+  Plug 'maxmellon/vim-jsx-pretty'
+  " Plug 'leafgarland/typescript-vim'  " typescript syntax highlighting
+  " Plug 'Quramy/tsuquyomi'  " typescript IDE, client of TSServer
+  " vue
+  Plug 'posva/vim-vue', { 'for': 'vue' }
+  " json
+  Plug 'elzr/vim-json'
   " python
   Plug 'Vimjas/vim-python-pep8-indent'
   Plug 'davidhalter/jedi-vim'  " python completion こっちの方が良さげ
   " haskell
   Plug 'dag/vim2hs'
-  Plug 'tpope/vim-fugitive'  " git plugin
-  Plug 'airblade/vim-gitgutter'
-  Plug 'editorconfig/editorconfig-vim'  " editorconfig
   " rust
-  Plug 'rust-lang/rust.vim'  " rust
-  " Plug 'JuliaEditorSupport/julia-vim' " julia
-  if has('mac')
-    Plug '/usr/local/opt/fzf'
-  else
-    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-  endif
-  Plug 'junegunn/fzf.vim'
+  Plug 'rust-lang/rust.vim'
+  " julia
+  Plug 'JuliaEditorSupport/julia-vim'
   " singularity
   Plug 'singularityware/singularity.lang', {'rtp': 'vim/'}
   call plug#end()
@@ -305,8 +314,6 @@ let g:vim_markdown_autowrite = 1
 autocmd BufNewFile,BufRead *.md setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
 
 " javascript
-let g:javascript_plugin_jsdoc = 1
-let g:jsx_ext_required = 0
 
 " typescript
 autocmd BufNewFile,BufRead *.ts,*.tsx setlocal filetype=typescript
