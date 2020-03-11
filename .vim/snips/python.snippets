@@ -663,3 +663,10 @@ for r in infile:
     print(r)
     print(r.reference_name, r.reference_start, r.query_name, r.mapping_quality, r.is_reverse)
 endsnippet
+
+snippet tobytes
+y = np.array([1,2,3,4,5], dtype=np.float32)
+D = np.ndarray.tobytes(y)
+D2 = np.frombuffer(D, dtype=np.float32)
+assert np.all(y == D2)
+endsnippet

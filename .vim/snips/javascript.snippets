@@ -209,3 +209,12 @@ const blob = new Blob([ content ], { "type" : "text/plain" })
 elem.href = window.URL.createObjectURL(blob)
 elem.click()
 endsnippet
+
+snippet error "raise error manually for debug"
+try {
+  throw new Error();
+} catch (error) {
+  console.error(error);
+}
+throw new Error("一般的なエラーだよ");
+endsnippet
