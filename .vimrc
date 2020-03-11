@@ -181,6 +181,7 @@ nmap <Leader>d "+d
 vmap <Leader>y "+y
 vmap <Leader>d "+d
 nmap <Leader>t :r !tmux save-buffer -<CR>
+" replace it to `C-o:r !tmux save-buffer -<CR>`
 " 全文コピー
 nmap <Leader>Y gg"+yG
 " ペースト
