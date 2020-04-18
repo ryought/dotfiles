@@ -665,3 +665,11 @@ for r in infile:
     print(r)
     print(r.reference_name, r.reference_start, r.query_name, r.mapping_quality, r.is_reverse)
 endsnippet
+
+snippet collection
+# list内の出現頻度を計算する
+from collections import Counter
+Counter([1,2,2,3]).most_common()
+# -> [(1, 1), (2, 2), (3, 1)]
+# (要素, 出現頻度)
+endsnippet

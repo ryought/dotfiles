@@ -46,7 +46,7 @@ alias mummerplot='PERL5LIB=/work/ryought/tools/anaconda3/lib/ mummerplot'
 [ -f "$HOME/z.sh" ] && . $HOME/z.sh
 
 # Juicebox over vnc
-alias juicebox='ssh -L 8786:ax01:5901 ax01 -t "PATH=/bio/bin:/usr/local/bin:/bin:/usr/bin:/grid/sgeadmin/bin/lx24-amd64 vncserver -geometry 1440x900 -fg & DISPLAY=:1 java -jar /work/ryought/tools/Juicebox_1.9.8.jar"'
+alias juicebox='ssh -L 8081:ax01:8081 ax01 -t "PATH=/bio/bin:/usr/local/bin:/bin:/usr/bin:/grid/sgeadmin/bin/lx24-amd64 vncserver -geometry 1440x900 -fg & /work/ryought/noVNC/utils/launch.sh --vnc localhost:5901 --listen 8081 & DISPLAY=:1 java -jar /work/ryought/tools/Juicebox_1.9.8.jar"'
 alias gepard='ssh -L 8786:ax01:5901 ax01 -t "PATH=/bio/bin:/usr/local/bin:/bin:/usr/bin:/grid/sgeadmin/bin/lx24-amd64 vncserver -geometry 1440x900 -fg & DISPLAY=:1 java -jar /work/ryought/tools/Gepard-1.40.jar"'
 
 # # ssh-agent config

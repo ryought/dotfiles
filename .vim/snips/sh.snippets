@@ -240,11 +240,31 @@ snippet sge "sun grid engine qsub scripts"
 #$ -pe smp 1
 #$ -l mem_free=1GB
 #$ -t 1:12
+set -Ceuo pipefail
 {
   date
   echo "this is ${SGE_TASK_ID}"
   slackify "job $REQUEST finished"
-} &> hoge.${SGE_TASK_ID}.log
+} &>> hoge.${SGE_TASK_ID}.log
+endsnippet
+
+snippet sgeparam "sun grid engine qsub scripts with param"
+#$ -S /bin/bash
+#$ -cwd
+#$ -V
+#$ -o ./out
+#$ -j y
+#$ -pe smp 1
+#$ -l mem_free=1GB
+set -Ceuo pipefail
+{
+  date
+  echo "param K$K"
+  slackify "job $REQUEST finished"
+} &>> $REQUEST.log
+
+# to submit
+# $ qsub -v K=20 -N "run-arg-test.K20" run-arg-test.sh
 endsnippet
 
 snippet yq "yaml query example"
