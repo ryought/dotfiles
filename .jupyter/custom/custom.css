@@ -10,5 +10,5 @@ a hack to deal with our current css styles and no new styling should be added in
 }
 
 .CodeMirror pre, .output pre {
-  font-family: 'Migu 2M'; 
+  font-family: 'Monaco';
 }

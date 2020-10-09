@@ -246,6 +246,21 @@ set -Ceuo pipefail
   echo "this is ${SGE_TASK_ID}"
   slackify "job $REQUEST finished"
 } &>> hoge.${SGE_TASK_ID}.log
+
+#$ -S /bin/bash
+#$ -N aa
+#$ -cwd
+#$ -V
+#$ -o ./log
+#$ -j y
+#$ -m e
+#$ -M ryonakabayashi@gmail.com
+#$ -pe smp 12
+#$ -l mem_free=450GB
+cd $(dirname $0)
+
+date
+echo 'hoge'
 endsnippet
 
 snippet sgeparam "sun grid engine qsub scripts with param"

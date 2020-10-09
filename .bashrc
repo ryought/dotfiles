@@ -58,15 +58,12 @@ if type __git_ps1 > /dev/null 2>&1 ; then
 fi
 # prompt definition
 export PROMPT_DIRTRIM=3  # trim path longer than 3
-if [[ "${SSH_TTY}" ]]; then
-  # ssh
-  PS1="\[\033[33m\](\t) \[\033[37m\033[41m\] \u@\h \[\033[00m\] \[\033[01m\]\w\[\033[31;2m\]${git_prompt}\[\033[00m\] \\$ "
-elif [ $UID -eq 0 ]; then
+if [ $UID -eq 0 ]; then
   # root
   PS1='\[\033[31m\](\t)\u@\H\[\033[00m\] \[\033[01m\]\w \[\033[00m\]\\$ '
 else
   # normal user
-  PS1="\[\033[32m\](\t)\[\033[00m\] \[\033[01m\]\w\[\033[31;2m\]${git_prompt}\[\033[00m\] \\$ "
+  PS1="\[\033[33m\](\t) \[\033[37m\033[41m\] \u@\h \[\033[00m\] \[\033[01m\]\w\[\033[31;2m\]${git_prompt}\[\033[00m\] \\$ "
 fi
 
 ## OS specific settings ##
@@ -87,6 +84,7 @@ alias grep="grep --color"
 alias o="open ."
 alias vi="vim"
 alias v="vim"
+alias ci="vim"
 alias c="clang++ -std=c++14 -Wall -g -fsanitize=undefined -D_GLIBCXX_DEBUG"
 alias g="git"
 alias gti="git"

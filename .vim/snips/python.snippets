@@ -1,5 +1,5 @@
 snippet #! "Shebang header for python scripts" b
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 $0
@@ -150,7 +150,9 @@ x = pd.read_table(path, usecols=[0,1,2])
 # or
 import csv
 with open('hoge.csv', 'r') as f:
-    reader = csv.reader(f)
+    reader = csv.reader(f, delimiter='\t')
+    for row in reader:
+        print(row)
 endsnippet
 
 snippet test "pytest template"
@@ -328,6 +330,9 @@ plt.show()
 
 # plotのサイズを変更する
 plt.figure(figsize=(7, 7))
+
+# save
+plt.savefig('hoge.png', dpi=200)
 endsnippet
 
 snippet 3dplot "3d plot in matplotlib"
@@ -594,7 +599,12 @@ endsnippet
 snippet argv "コマンドライン引数と環境変数の取得"
 import sys
 if len(sys.argv) == 2:
-	print(sys.argv)  # ['hoge.py', 'abc'] if python hoge.py abc
+    print(sys.argv)  # ['hoge.py', 'abc'] if python hoge.py abc
+
+import sys
+if len(sys.argv) != 2:
+    print('usage: python3 read_filling.py hoge.paf > hoge.paf.tsv')
+    sys.exit(1)
 
 import os
 os.environ['PATH']

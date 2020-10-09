@@ -89,6 +89,7 @@ set autoread  " 編集中のファイルが変更されたら自動で読み直�
 set hidden "バッファが編集中でも他のファイルを開けるように
 set showcmd "入力中のコマンドをステータスに表示
 set backspace=indent,eol,start
+set ttyfast " fast drawing
 
  "disable creating backup, swap files
 set nobackup  "バックアップ
@@ -103,7 +104,7 @@ endif
 
 """" Appearances
 set ruler  " カーソル何行目何列目にあるか表示
-" set cursorline  " カーソル位置表示 重いのでoff
+set cursorline  " カーソル位置表示 重いのでoff
 " nnoremap j gj
 " nnoremap k gk
 set virtualedit=onemore
@@ -194,6 +195,9 @@ map sj <C-w>j
 map sk <C-w>k
 map sl <C-w>l
 map sh <C-w>h
+" for iPad
+noremap! ¥ \
+nmap <Leader>^ <C-^>
 
 " 前回のカーソル位置を記憶
 " autocmd BufWinLeave ?* silent mkview
