@@ -16,9 +16,9 @@ process() {
     -V geometry:a4paper \
     -V geometry:margin=3cm \
     -V mainfont="Asana Math" \
-    -V linestretch=1.0 \
+    -V linestretch=0.9 \
     -V header-includes="\usepackage[version=3]{mhchem} \usepackage{url} \usepackage{wrapfig} \usepackage{graphicx}" \
-    --latex-engine=lualatex $1 -o $1.pdf
+    --pdf-engine=lualatex $1 -o $1.pdf
 }
 
 # show usage

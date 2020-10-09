@@ -672,3 +672,19 @@ D = np.ndarray.tobytes(y)
 D2 = np.frombuffer(D, dtype=np.float32)
 assert np.all(y == D2)
 endsnippet
+
+snippet csvtool
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import sys
+import csv
+for line in csv.reader(sys.stdin):
+    # print(line.split(','))
+    # print(line)
+
+    print(','.join([line[0], line[1], line[3], line[4]]))
+
+    # text_ja = line[0]
+    # text_en = '\"' + ','.join(line[1:]) + '\"'
+    # print('{},{}'.format(text_ja, text_en))
+endsnippet
