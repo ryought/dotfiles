@@ -314,3 +314,14 @@ do
   echo "key is $key"
 done
 endsnippet
+
+snippet modify-stdout
+{
+echo 'hogehoge'
+echo 'fugaaaa'
+ls /foo
+} \
+&> >( while read -r LINE; do echo "hogeee $LINE"; done )
+# or ">> hoge.log" and print on console
+# &> >( while read -r LINE; do echo "hogeee $LINE"; done | tee -a hoge.log )
+endsnippet

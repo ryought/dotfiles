@@ -683,3 +683,26 @@ Counter([1,2,2,3]).most_common()
 # -> [(1, 1), (2, 2), (3, 1)]
 # (要素, 出現頻度)
 endsnippet
+
+snippet tobytes
+y = np.array([1,2,3,4,5], dtype=np.float32)
+D = np.ndarray.tobytes(y)
+D2 = np.frombuffer(D, dtype=np.float32)
+assert np.all(y == D2)
+endsnippet
+
+snippet csvtool
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+import sys
+import csv
+for line in csv.reader(sys.stdin):
+    # print(line.split(','))
+    # print(line)
+
+    print(','.join([line[0], line[1], line[3], line[4]]))
+
+    # text_ja = line[0]
+    # text_en = '\"' + ','.join(line[1:]) + '\"'
+    # print('{},{}'.format(text_ja, text_en))
+endsnippet

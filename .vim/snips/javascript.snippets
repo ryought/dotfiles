@@ -118,6 +118,10 @@ wait3sec(5).then((message) => {
 const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 // 複数のpromiseの返り待ち
+Promise.all([promise1, promise2, promise3]).then((values) => {
+  console.log(values);
+  });
+}
 endsnippet
 
 snippet classdef "class definition"
@@ -208,4 +212,35 @@ const elem = document.createElement('a')
 const blob = new Blob([ content ], { "type" : "text/plain" })
 elem.href = window.URL.createObjectURL(blob)
 elem.click()
+endsnippet
+
+snippet error "raise error manually for debug"
+try {
+  throw new Error();
+} catch (error) {
+  console.error(error);
+}
+throw new Error("一般的なエラーだよ");
+endsnippet
+
+snippet base64 "base64"
+// below two nodejs/browser code is compatible.
+// nodejs https://stackoverflow.com/questions/23097928/node-js-throws-btoa-is-not-defined-error
+// https://github.com/node-browser-compat/btoa/blob/master/index.js
+const base64 = Buffer.from(binary_string, 'binary').toString('base64')
+const binary_string = Buffer.from(base64, 'base64').toString('binary')
+
+// browser
+const base64 = btoa(binary_string)
+const binary_string = atob(base64)
+
+//pako
+// ->
+const next = { hoge: 'test' }
+const packets_binstr = pako.gzip(JSON.stringify(next), { to: 'string' })
+const b64 = btoa(packets_binstr)
+// <-
+const bstr = atob(b64)
+const out = JSON.parse(pako.ungzip(bstr, { to: 'string' }))
+console.log('check', next, b64, out)
 endsnippet
