@@ -8,6 +8,7 @@ shopt -s cdspell  # fix typo automatically when directory moving
 shopt -s nocaseglob
 shopt -s dirspell
 shopt -s globstar  # enable "**"
+shopt -s extglob
 
 # C-d
 export IGNOREEOF=1  # disable C-d for exiting bash
@@ -151,3 +152,6 @@ function nvm () {
   fi
   nvm $@
 }
+
+# Created by `userpath` on 2020-12-16 07:35:02
+export PATH="$PATH:/Users/ryought/.local/bin"

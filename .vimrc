@@ -1,10 +1,5 @@
 " vimrc
 "  - ryought
-" ============= PATH ======================
-" path setting
-if has('mac')
-  let $PATH = "~/.pyenv/shims:".$PATH
-endif
 
 " ============= PLUGINS ===================
 " package manager: plug.vim
@@ -17,17 +12,16 @@ endif
 if filereadable(expand('~/.vim/autoload/plug.vim'))
   call plug#begin('~/.vim/plugged')
   "------ essentials --------------
-  " file search commands
-  Plug 'ctrlpvim/ctrlp.vim'  " fuzzy file finder
-  Plug 'lokikl/vim-ctrlp-ag'  " ag
-  Plug 'mileszs/ack.vim'
   " fzf
-  if has('mac')
-    Plug '/usr/local/opt/fzf'
-  else
-    Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-  endif
+  " if has('mac')
+  "   Plug '/usr/local/opt/fzf'
+  " else
+  "   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  " endif
+  " Plug 'junegunn/fzf.vim'
+  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
   Plug 'junegunn/fzf.vim'
+
   " snippet engine
   if has('python3')
     Plug 'SirVer/ultisnips'
@@ -37,6 +31,7 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
           \   'dir': get(g:, 'plug_home', '~/.vim/bundle') . '/ultisnips_py2',
           \ }
   endif
+
   " extend commands
   Plug 'tpope/vim-commentary'  " gc commentize
   Plug 'ntpeters/vim-better-whitespace'
@@ -54,17 +49,22 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
   Plug 'airblade/vim-gitgutter'
   Plug 'editorconfig/editorconfig-vim'  " editorconfig
 
+  "------ Language Server Protocol -----
+  Plug 'prabirshrestha/vim-lsp'
+  Plug 'mattn/vim-lsp-settings'
+  Plug 'prabirshrestha/asyncomplete.vim'
+  Plug 'prabirshrestha/asyncomplete-lsp.vim'
+
   "------ language --------------
-  " syntax check, lint
-  Plug 'w0rp/ale'
   " go
-  Plug 'vim-jp/vim-go-extra' , { 'for': 'go' }
-  Plug 'fatih/vim-go' , { 'for': 'go', 'do': ':GoInstallBinaries' }
+  " Plug 'vim-jp/vim-go-extra' , { 'for': 'go' }
+  " Plug 'fatih/vim-go' , { 'for': 'go', 'do': ':GoInstallBinaries' }
+  " markdown
   Plug 'plasticboy/vim-markdown'
   " js, ts, jsx
-  Plug 'yuezk/vim-js'
-  Plug 'HerringtonDarkholme/yats.vim'  " typescript?
-  Plug 'maxmellon/vim-jsx-pretty'
+  " Plug 'yuezk/vim-js'
+  " Plug 'HerringtonDarkholme/yats.vim'  " typescript?
+  " Plug 'maxmellon/vim-jsx-pretty'
   " Plug 'leafgarland/typescript-vim'  " typescript syntax highlighting
   " Plug 'Quramy/tsuquyomi'  " typescript IDE, client of TSServer
   " vue
@@ -72,14 +72,12 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
   " json
   Plug 'elzr/vim-json'
   " python
-  Plug 'Vimjas/vim-python-pep8-indent'
-  Plug 'davidhalter/jedi-vim'  " python completion こっちの方が良さげ
+  " Plug 'Vimjas/vim-python-pep8-indent'
+  " Plug 'davidhalter/jedi-vim'  " python completion こっちの方が良さげ
   " haskell
   Plug 'dag/vim2hs'
   " rust
   Plug 'rust-lang/rust.vim'
-  " julia
-  Plug 'JuliaEditorSupport/julia-vim'
   " singularity
   Plug 'singularityware/singularity.lang', {'rtp': 'vim/'}
   call plug#end()
@@ -119,7 +117,8 @@ set cursorline  " カーソル位置表示 重いのでoff
 set virtualedit=onemore
 set showmatch "対応する括弧の強調
 set laststatus=2
-set wildmenu wildmode=list:longest
+set wildmenu wildmode=list:full
+" set wildmenu wildmode=list:longest
 set whichwrap=h,l " 行頭行末の移動で前後の行に飛ばないようにする
 set background=dark
 try
@@ -169,14 +168,7 @@ set previewheight=6  " preview windowの最大高さ
 
 """" Key Mapping
 let mapleader = "\<Space>"
-" viminfoを保存、共有する
-" nnoremap <Leader>s :wv<CR>
-" nnoremap <Leader>r :rv!<CR>
-" register一覧を表示
-nmap <Leader>r :reg<CR>
-" mark一覧を表示
 nmap <Leader>m :marks<CR>
-" コピー
 nmap <Leader>y "+y
 nmap <Leader>d "+d
 vmap <Leader>y "+y
@@ -199,11 +191,6 @@ cnoremap <c-n>  <down>
 cnoremap <c-p>  <up>
 " remove search highlight
 nmap <ESC><ESC> :noh<CR>
-" pane moving
-map sj <C-w>j
-map sk <C-w>k
-map sl <C-w>l
-map sh <C-w>h
 " for iPad
 noremap! ¥ \
 nmap <Leader>^ <C-^>
@@ -217,44 +204,9 @@ augroup vimrcEx
 augroup END
 
 " ============= PLUGIN CONFIGS ============
-" ctrlp.vim
-let g:ctrlp_map = '<c-p>'
-" 最大ファイル数、最大検索深さ
-let g:ctrlp_max_files = 100000
-let g:ctrlp_max_depth = 10
-" vimのカレントディレクトリからのパネル優先
-let g:ctrlp_cmd = 'CtrlPBuffer'
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_open_new_file = 'r'
-" 除外ファイル
-set wildignore+=*/tmp/*,*.so,*.swp,*.zip "ファイルを無視
-let g:ctrlp_custom_ignore = {
-  \ 'dir': '\v[\/]\.(git|hg|svn)$',
-  \ 'file': '\v\.(exe|so|dll)$',
-  \ }
-let g:ctrlp_extensions = ['quickfix', 'dir', 'line', 'change', 'undo']
-" ag or git lsを使って検索
-" http://postd.cc/how-to-boost-your-vim-productivity/
-let g:ctrlp_use_caching = 0
-if executable('ag')
-  " use ag if available
-  set grepprg=ag\ --nogroup\ --nocolor
-  let g:ctrlp_user_command = 'ag %s -l --nocolor -g ""'
-else
-  " use git ls
-  let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files . -co --exclude-standard', 'find %s -type f']
-  let g:ctrlp_prompt_mappings = {
-    \ 'AcceptSelection("e")': ['<space>', '<cr>', '<2-LeftMouse>'],
-    \ }
-endif
-" migemo 日本語のfuzzy検索
-let g:ctrlp_use_migemo = 1
-
-
-" ack.vim
-" from ag.vim
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep --smart-case'
+if executable('rg')
+  set grepprg=rg\ --vimgrep\ --no-heading
+  set grepformat=%f:%l:%c:%m,%f:%l:%m
 endif
 
 " ultisnips
@@ -274,21 +226,35 @@ let g:EditorConfig_exclude_patterns = ['fugitive://.*']
 
 
 " fzf.vim
+" https://github.com/junegunn/fzf/blob/master/README-VIM.md
+let g:fzf_layout = { 'down': '40%' }
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
 nnoremap <Leader>b :Buffers<CR>
-nnoremap <Leader>a :Ag<CR>
+nnoremap <Leader>r :Rg<Space>
+nnoremap <Leader>f :GFiles<CR>
+nnoremap <Leader>F :Files<CR>
 nnoremap <Leader>c :Commits<CR>
 nnoremap <Leader>C :BCommits<CR>
+nnoremap <Leader>l :History<CR>
 
-" gitgutter
-" https://github.com/statico/dotfiles/blob/master/.vim/vimrc
-nmap \g :GitGutterToggle<CR>
-let g:gitgutter_sign_added = '∙'
-let g:gitgutter_sign_modified = '∙'
-let g:gitgutter_sign_removed = '∙'
-let g:gitgutter_sign_modified_removed = '∙'
 
 " indent line
 let g:indentLine_char_list = ['|', '¦']
+
+
 " rainbow
 let g:rainbow_active = 1
 let g:rainbow_conf = {
@@ -298,6 +264,65 @@ let g:rainbow_conf = {
       \   '*': 0
       \ }
       \}
+
+
+" vim-lsp
+function! s:on_lsp_buffer_enabled() abort
+  setlocal omnifunc=lsp#complete
+  setlocal signcolumn=yes
+  if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+  nmap <buffer> gd <plug>(lsp-definition)
+  nmap <buffer> gs <plug>(lsp-document-symbol-search)
+  nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
+  nmap <buffer> gr <plug>(lsp-references)
+  nmap <buffer> gi <plug>(lsp-implementation)
+  nmap <buffer> gt <plug>(lsp-type-definition)
+  nmap <buffer> [g <Plug>(lsp-previous-diagnostic)
+  nmap <buffer> ]g <Plug>(lsp-next-diagnostic)
+  nmap <buffer> <C-k> <Plug>(lsp-previous-diagnostic)
+  nmap <buffer> <C-j> <Plug>(lsp-next-diagnostic)
+  nmap <buffer> K <plug>(lsp-hover)
+  let g:lsp_format_sync_timeout = 1000
+  autocmd! BufWritePre *.rs,*.go call execute('LspDocumentFormatSync')
+endfunction
+
+augroup lsp_install
+  au!
+  autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
+
+" language settings
+let g:lsp_settings = {
+      \   'pyls-all': {
+      \     'workspace_config': {
+      \       'pyls': {
+      \         'plugins': {
+      \           'pyflakes': { 'enabled': v:true },
+      \           'flake8': { 'enabled': v:false },
+      \           'pycodestyle': { 'enabled': v:false },
+      \           'pydocstyle': { 'enabled': v:false },
+      \           'jedi_definition': {
+      \             'follow_imports': v:true,
+      \             'follow_builtin_imports': v:true,
+      \           },
+      \         },
+      \       }
+      \     }
+      \   },
+      \}
+
+" show warning text when hovering cursor
+let g:lsp_diagnostics_echo_cursor = 1
+" style of diagnotics
+let g:lsp_diagnostics_signs_error = {'text': 'x'}
+let g:lsp_diagnostics_signs_warning = {'text': '>'}
+let g:lsp_diagnostics_signs_hint = {'text': '>'}
+let g:lsp_diagnostics_highlights_enabled = 0
+" disable suggestions
+let g:lsp_settings_enable_suggestions = 0
+" lsp hover highlight style
+highlight lspReference cterm=bold ctermfg=14
+
 
 " === language specific ===================
 " { completion
@@ -350,36 +375,11 @@ inoremap # X<c-h>#
 " indent
 autocmd BufNewFile,BufRead *.py setlocal expandtab tabstop=4 shiftwidth=4
 
-" jedi-vim
-let g:jedi#popup_on_dot = 0
-let g:jedi#goto_command = "<leader>d"
-let g:jedi#goto_assignments_command = "<leader>g"
-let g:jedi#goto_definitions_command = ""
-let g:jedi#documentation_command = "K"
-let g:jedi#usages_command = "<leader>n"
-let g:jedi#completions_command = "<C-Space>"
-let g:jedi#rename_command = "<leader>r"
-
-" ale
-" エラー間移動
-nmap <silent> <C-k> <Plug>(ale_previous_wrap)
-nmap <silent> <C-j> <Plug>(ale_next_wrap)
-let g:ale_linters = {
-      \ 'javascript': ['eslint'],
-      \ 'python': ['pyflakes'],
-      \ 'cpp': ['clang'],
-      \ 'c': ['clang'],
-      \ 'rust': ['cargo'],
-      \ }
-let g:ale_lint_on_enter = 0  " オープン時のチェックをしない
-let g:ale_sign_error = 'x'
-let g:ale_sign_warning = '>'
-
 " go
 autocmd BufNewFile,BufRead *.go setlocal noexpandtab tabstop=4 shiftwidth=4
-let g:go_highlight_types = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
+" let g:go_highlight_types = 1
+" let g:go_highlight_functions = 1
+" let g:go_highlight_methods = 1
 
 " haskell
 autocmd FileType haskell nnoremap <buffer> <silent> <Leader>t: :Tabularize colon<CR>

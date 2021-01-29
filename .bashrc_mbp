@@ -12,7 +12,8 @@
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 
-export GOPATH=$HOME/src/go
+export GOPATH=$HOME/go
+export PATH="$GOPATH/bin:$PATH"
 
 # use ruby installed from homebrew
 export PATH="/usr/local/opt/ruby/bin:$PATH"
@@ -29,3 +30,6 @@ export PATH="/Users/ryought/Library/Python/3.8/bin:$PATH"
 if [ -f '/Users/ryought/google-cloud-sdk/path.bash.inc' ]; then . '/Users/ryought/google-cloud-sdk/path.bash.inc'; fi
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/ryought/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/ryought/google-cloud-sdk/completion.bash.inc'; fi
+
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"

@@ -1,6 +1,6 @@
 MIN_DOTFILES         := .bash_profile .bashrc .inputrc .vimrc .gitconfig
 DOTFILES             := .bash_sessions_disable .gitconfig .condarc .tmux.conf .gvimrc .ideavimrc .gitignore_global .gdbinit
-DOTFILES_WITH_FOLDER := .matplotlib/matplotlibrc .ipython/profile_default/startup/00first.py .jupyter/custom/custom.css .jupyter/custom/custom.js
+DOTFILES_WITH_FOLDER := .matplotlib/matplotlibrc .ipython/profile_default/startup/00first.py .jupyter/custom/custom.css .jupyter/custom/custom.js .config/alacritty/alacritty.yml
 FOLDER               := .vim/snips .tools
 OBJECTS              := $(MIN_DOTFILES) $(DOTFILES) $(DOTFILES_WITH_FOLDER) $(FOLDER)
 TARGETS              := $(patsubst %,%.target,$(OBJECTS))

@@ -8,7 +8,3 @@
 
 # vim
 .ropeproject/
-
-# npm
-package-lock.json
-yarn.lock
