@@ -24,6 +24,3 @@ then
   ssh-add -K ~/.ssh/github
   ssh-add -K ~/.ssh/gitlab_rsa
 fi
-
-# Created by `userpath` on 2020-12-16 07:35:02
-export PATH="$PATH:/Users/ryought/.local/bin"

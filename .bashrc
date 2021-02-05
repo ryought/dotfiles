@@ -139,19 +139,3 @@ do
   fi
 done
 unset file
-
-# nvm
-export NVM_DIR="$HOME/.nvm"
-# delay loading functions
-function nvm () {
-  if type 'nvm' > /dev/null 2>&1
-  then
-    echo 'loading nvm'
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-  fi
-  nvm $@
-}
-
-# Created by `userpath` on 2020-12-16 07:35:02
-export PATH="$PATH:/Users/ryought/.local/bin"

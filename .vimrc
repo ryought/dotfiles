@@ -2,13 +2,11 @@
 "  - ryought
 
 " ============= PLUGINS ===================
-" package manager: plug.vim
+" Install plug.vim if necessary
 if empty(glob('~/.vim/autoload/plug.vim'))
   silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
-"  to install, run below
-" $ curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 if filereadable(expand('~/.vim/autoload/plug.vim'))
   call plug#begin('~/.vim/plugged')
   "------ essentials --------------
@@ -57,23 +55,20 @@ if filereadable(expand('~/.vim/autoload/plug.vim'))
 
   "------ language --------------
   " go
-  " Plug 'vim-jp/vim-go-extra' , { 'for': 'go' }
-  " Plug 'fatih/vim-go' , { 'for': 'go', 'do': ':GoInstallBinaries' }
+  Plug 'vim-jp/vim-go-extra' , { 'for': 'go' }
   " markdown
   Plug 'plasticboy/vim-markdown'
-  " js, ts, jsx
-  " Plug 'yuezk/vim-js'
-  " Plug 'HerringtonDarkholme/yats.vim'  " typescript?
-  " Plug 'maxmellon/vim-jsx-pretty'
-  " Plug 'leafgarland/typescript-vim'  " typescript syntax highlighting
-  " Plug 'Quramy/tsuquyomi'  " typescript IDE, client of TSServer
+  " js, ts, jsx (https://github.com/MaxMEllon/vim-jsx-pretty)
+  Plug 'yuezk/vim-js'
+  Plug 'HerringtonDarkholme/yats.vim'
+  Plug 'maxmellon/vim-jsx-pretty'
   " vue
   Plug 'posva/vim-vue', { 'for': 'vue' }
+  Plug 'digitaltoad/vim-pug'
   " json
   Plug 'elzr/vim-json'
   " python
-  " Plug 'Vimjas/vim-python-pep8-indent'
-  " Plug 'davidhalter/jedi-vim'  " python completion こっちの方が良さげ
+  Plug 'Vimjas/vim-python-pep8-indent'
   " haskell
   Plug 'dag/vim2hs'
   " rust
@@ -112,13 +107,13 @@ endif
 """" Appearances
 set ruler  " カーソル何行目何列目にあるか表示
 set cursorline  " カーソル位置表示 重いのでoff
+" set relativenumber
 " nnoremap j gj
 " nnoremap k gk
 set virtualedit=onemore
 set showmatch "対応する括弧の強調
 set laststatus=2
-set wildmenu wildmode=list:full
-" set wildmenu wildmode=list:longest
+set wildmenu wildmode=list:longest
 set whichwrap=h,l " 行頭行末の移動で前後の行に飛ばないようにする
 set background=dark
 try
@@ -168,7 +163,6 @@ set previewheight=6  " preview windowの最大高さ
 
 """" Key Mapping
 let mapleader = "\<Space>"
-nmap <Leader>m :marks<CR>
 nmap <Leader>y "+y
 nmap <Leader>d "+d
 vmap <Leader>y "+y
@@ -248,7 +242,7 @@ nnoremap <Leader>f :GFiles<CR>
 nnoremap <Leader>F :Files<CR>
 nnoremap <Leader>c :Commits<CR>
 nnoremap <Leader>C :BCommits<CR>
-nnoremap <Leader>l :History<CR>
+nnoremap <Leader>m :History<CR>
 
 
 " indent line
@@ -310,6 +304,7 @@ let g:lsp_settings = {
       \     }
       \   },
       \}
+let g:lsp_settings_filetype_javascript = 'eslint-language-server'
 
 " show warning text when hovering cursor
 let g:lsp_diagnostics_echo_cursor = 1
@@ -346,14 +341,7 @@ autocmd BufNewFile,BufRead *.md setlocal tabstop=4 softtabstop=4 shiftwidth=4 ex
 " javascript
 
 " typescript
-autocmd BufNewFile,BufRead *.ts,*.tsx setlocal filetype=typescript
-let g:tsuquyomi_disable_default_mappings = 1
-" show type hint
-autocmd FileType typescript nmap <buffer> <Leader>t : <C-u>echo tsuquyomi#hint()<CR>
-" goto def
-autocmd FileType typescript nmap gd <Plug>(TsuquyomiDefinition)
-" usage
-autocmd FileType typescript nmap <Leader>u <Plug>(TsuquyomiReferences)
+" autocmd BufNewFile,BufRead *.ts,*.tsx setlocal filetype=typescript
 
 
 " tex
@@ -392,7 +380,7 @@ autocmd BufRead,BufNewFile *.ts set filetype=typescript
 autocmd BufRead,BufNewFile *.launch set filetype=xml
 
 " vue .vueが崩れる時用
-autocmd FileType vue syntax sync fromstart
+" autocmd FileType vue syntax sync fromstart
 
 " lisp
 let g:lisp_rainbow = 1
