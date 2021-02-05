@@ -12,7 +12,8 @@
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/emulator:$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools
 
-export GOPATH=$HOME/src/go
+export GOPATH=$HOME/go
+export PATH="$GOPATH/bin:$PATH"
 
 # use ruby installed from homebrew
 export PATH="/usr/local/opt/ruby/bin:$PATH"
@@ -29,3 +30,27 @@ export PATH="/Users/ryought/Library/Python/3.8/bin:$PATH"
 if [ -f '/Users/ryought/google-cloud-sdk/path.bash.inc' ]; then . '/Users/ryought/google-cloud-sdk/path.bash.inc'; fi
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/ryought/google-cloud-sdk/completion.bash.inc' ]; then . '/Users/ryought/google-cloud-sdk/completion.bash.inc'; fi
+
+# nodejs(nvm)
+export NVM_DIR="$HOME/.nvm"
+# delay loading functions
+function nvm () {
+  if type 'nvm' > /dev/null 2>&1
+  then
+    echo 'loading nvm'
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+  fi
+  nvm $@
+}
+
+# Created by `userpath` on 2020-12-16 07:35:02
+export PATH="$PATH:/Users/ryought/.local/bin"
+
+# python
+# pipenv
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+# poetry
+export PATH="$HOME/.poetry/bin:$PATH"

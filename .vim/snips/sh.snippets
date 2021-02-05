@@ -351,3 +351,14 @@ shift $((OPTIND - 1))
 
 echo "ok" $FLAG_A $VALUE_D \$1
 endsnippet
+
+snippet diff-patch "create patch with all (w/ modify rename remove newfile) and binary changes"
+# -r: recursive -N: with new file -a & --binary: include binary diff -u: unified format
+diff -rN -au --binary ws ws2 > patch
+# -p1: skip first directory (convert patch's "ws/hoge and ws2/hoge" into "hoge and hoge")
+# -u: unified format -d: to directory
+# --binary: enable binary diff(default on)
+patch -p1 -u -d ws < patch
+# check again to test there is no diff
+diff -rN -au --binary ws ws2
+endsnippet

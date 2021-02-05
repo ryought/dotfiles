@@ -15,10 +15,10 @@
   a = add
   p = push
   c = commit
+  d = diff
   graph = log --graph --date=short --decorate=short --pretty=format:'%Cgreen%h %Creset%cd %Cblue%cn %Cred%d %Creset%s'
   graphall = log --graph --all --decorate
   showMergedLocalBranch = branch --merged
   showMergedRemoteBranch = branch -r --merged
   deleteLocalBranch = branch -d
   deleteRemoteBranch = push --delete origin
-
