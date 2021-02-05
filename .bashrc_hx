@@ -8,27 +8,20 @@ alias any2fasta='PATH=/bio/bin:/usr/local/bin:/bin:/usr/bin:/grid/sgeadmin/bin/l
 
 
 ## Anaconda ##
-# simple version
-if [ -f "/work/ryought/tools/anaconda3/etc/profile.d/conda.sh" ]; then
-  . "/work/ryought/tools/anaconda3/etc/profile.d/conda.sh"
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/work/ryought/tools/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/work/ryought/tools/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/work/ryought/tools/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/work/ryought/tools/miniconda3/bin:$PATH"
+    fi
 fi
-export PATH="/work/ryought/tools/anaconda3/bin:$PATH"
-# # added by Anaconda3 5.3.0 installer
-# # >>> conda init >>>
-# # !! Contents within this block are managed by 'conda init' !!
-# __conda_setup="$(CONDA_REPORT_ERRORS=false '/work/ryought/tools/anaconda3/bin/conda' shell.bash hook 2> /dev/null)"
-# if [ $? -eq 0 ]; then
-#     eval "$__conda_setup"
-# else
-#     if [ -f "/work/ryought/tools/anaconda3/etc/profile.d/conda.sh" ]; then
-#         . "/work/ryought/tools/anaconda3/etc/profile.d/conda.sh"
-#         CONDA_CHANGEPS1=false conda activate base
-#     else
-#         export PATH="/work/ryought/tools/anaconda3/bin:$PATH"
-#     fi
-# fi
-# unset __conda_setup
-# # <<< conda init <<<
+unset __conda_setup
+# <<< conda initialize <<<
 
 
 ## custom binary path ##

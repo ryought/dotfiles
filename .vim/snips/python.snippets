@@ -243,6 +243,7 @@ print('{:0.5f}'.format(15.2))
 print('%03.3f' % 15)
 np.set_printoptions(precision=3, suppress=True)
 np.set_printoptions(formatter={'float': '{: 0.3f}'.format})
+np.set_printoptions(linewidth=1000)
 endsnippet
 
 snippet pprint "pretty print"
@@ -390,6 +391,9 @@ np.random.normal(mu, sigma, N)
 np.random.randint(0, 100, 20) # [0, 100) 20 sample
 # seed
 np.random.seed(n)
+
+import random
+print(random.choice(['A', 'B', 'C']))
 endsnippet
 
 snippet numpyreverse "reverse ndarray"
@@ -705,4 +709,24 @@ for line in csv.reader(sys.stdin):
     # text_ja = line[0]
     # text_en = '\"' + ','.join(line[1:]) + '\"'
     # print('{},{}'.format(text_ja, text_en))
+endsnippet
+
+snippet kwargs
+def hoge(arg, **kwargs):
+    print(arg, kwargs)
+
+hoge(10, hoge='hoge')
+hoge(10, **dict(hoge='hoge'))
+# 10 {'hoge': 'hoge'}
+endsnippet
+
+snippet namedtuple
+from typing import NamedTuple
+
+class Read(NamedTuple):
+    pos: int
+    chunk_name: str
+
+r = Read(10, 'hoge')
+r.pos = 100
 endsnippet

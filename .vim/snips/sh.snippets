@@ -325,3 +325,29 @@ ls /foo
 # or ">> hoge.log" and print on console
 # &> >( while read -r LINE; do echo "hogeee $LINE"; done | tee -a hoge.log )
 endsnippet
+
+snippet getopts
+usage_exit() {
+  echo "Usage: \$0 [-a] [-d dir] item" 1>&2
+  exit 1
+}
+
+while getopts ad:h OPT
+do
+  case $OPT in
+    a)  FLAG_A=1
+      ;;
+    d)  VALUE_D=$OPTARG
+      ;;
+    h)  usage_exit
+      ;;
+    \?) usage_exit
+      ;;
+  esac
+done
+shift $((OPTIND - 1))
+
+[ $# -ne 1 ] && usage_exit
+
+echo "ok" $FLAG_A $VALUE_D \$1
+endsnippet
