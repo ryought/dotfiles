@@ -17,10 +17,3 @@
 
 ## load .bashrc ##
 test -r ~/.bashrc && source ~/.bashrc
-
-# add ssh key to agent
-if [ $( ps -ef | grep ssh-agent | wc -l ) -eq 1 ]
-then
-  ssh-add -K ~/.ssh/github
-  ssh-add -K ~/.ssh/gitlab_rsa
-fi
