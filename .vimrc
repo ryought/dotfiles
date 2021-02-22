@@ -10,14 +10,8 @@ endif
 if filereadable(expand('~/.vim/autoload/plug.vim'))
   call plug#begin('~/.vim/plugged')
   "------ essentials --------------
-  " fzf
-  " if has('mac')
-  "   Plug '/usr/local/opt/fzf'
-  " else
-  "   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-  " endif
-  " Plug 'junegunn/fzf.vim'
-  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  Plug 'junegunn/fzf', { 'do': './install --all' }  " download binary and setup bash hook
   Plug 'junegunn/fzf.vim'
 
   " snippet engine
