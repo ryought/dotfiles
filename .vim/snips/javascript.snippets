@@ -244,3 +244,10 @@ const bstr = atob(b64)
 const out = JSON.parse(pako.ungzip(bstr, { to: 'string' }))
 console.log('check', next, b64, out)
 endsnippet
+
+snippet range
+// [0, 1, 2, 3, 4]
+Array.from({length: 5}, (v, k) => k)
+// or
+[...Array(5).keys()]
+endsnippet

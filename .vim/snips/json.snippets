@@ -1,0 +1,20 @@
+snippet npm-specify-version
+# <major>.<minor>.<patch>
+# x
+"hoge": "1.x"
+"hoge": "1.2.x"
+
+# ^ Allows changes that do not modify the left-most non-zero digit in the [major, minor, patch] tuple.
+# ^1.2.3 roughly means "1.2.3 or higher, within 1"
+"hoge": "^1.2.3"
+# == 1.x
+"hoge": "^0.2.3"
+# == 0.2.x
+
+# ~ Allows changes in the level below the specified level
+# ~1.2.3 roughly means "only 1.2.3, besides lowest level"
+"hoge": "~1.2"
+# == 1.2.x
+"hoge": "~1"
+# == 1.x
+endsnippet
