@@ -2,6 +2,13 @@
 # local mbp settings
 #
 
+# add ssh key to agent
+if [ $( ps -ef | grep ssh-agent | wc -l ) -eq 1 ]
+then
+  ssh-add -K ~/.ssh/github
+  ssh-add -K ~/.ssh/gitlab_rsa
+fi
+
 # anaconda and homebrew
 # export PATH=/usr/local/anaconda3/bin:$PATH:/usr/local/bin
 

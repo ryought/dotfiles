@@ -10,14 +10,8 @@ endif
 if filereadable(expand('~/.vim/autoload/plug.vim'))
   call plug#begin('~/.vim/plugged')
   "------ essentials --------------
-  " fzf
-  " if has('mac')
-  "   Plug '/usr/local/opt/fzf'
-  " else
-  "   Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-  " endif
-  " Plug 'junegunn/fzf.vim'
-  Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  " Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+  Plug 'junegunn/fzf', { 'do': './install --all' }  " download binary and setup bash hook
   Plug 'junegunn/fzf.vim'
 
   " snippet engine
@@ -325,6 +319,8 @@ let g:lsp_diagnostics_highlights_enabled = 0
 let g:lsp_settings_enable_suggestions = 0
 " lsp hover highlight style
 highlight lspReference cterm=bold ctermfg=14
+" do not show split help viewer
+let g:lsp_signature_help_enabled = 0
 
 
 " === language specific ===================
