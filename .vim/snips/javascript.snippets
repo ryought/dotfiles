@@ -268,3 +268,10 @@ snippet argmax
 const x = Math.max(arr)
 arr.indexOf(x)
 endsnippet
+
+snippet range
+// [0, 1, 2, 3, 4]
+Array.from({length: 5}, (v, k) => k)
+// or
+[...Array(5).keys()]
+endsnippet

@@ -92,6 +92,9 @@ set nobackup  "バックアップ
 set noswapfile "スワップ
 set viminfo+=n~/.vim/viminfo
 
+" refresh time 100ms (to update git-diffs frequently)
+set updatetime=100
+
 " enable persistent-undo feature
 if has('persistent_undo')
   set undodir=~/.vim/undo
@@ -101,7 +104,12 @@ endif
 """" Appearances
 set ruler  " カーソル何行目何列目にあるか表示
 set cursorline  " カーソル位置表示 重いのでoff
-" set relativenumber
+" show line numbers only if local
+let g:localSession = ($STY == "")
+if g:localSession
+  set number
+  set relativenumber
+endif
 " nnoremap j gj
 " nnoremap k gk
 set virtualedit=onemore
@@ -311,6 +319,8 @@ let g:lsp_diagnostics_highlights_enabled = 0
 let g:lsp_settings_enable_suggestions = 0
 " lsp hover highlight style
 highlight lspReference cterm=bold ctermfg=14
+" do not show split help viewer
+let g:lsp_signature_help_enabled = 0
 
 
 " === language specific ===================
