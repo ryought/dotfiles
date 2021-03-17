@@ -282,6 +282,9 @@ snippet setusage "datastructure set"
 emptyset = set()
 s = set([1,2,3])
 len(s)
+s.add(e)
+s.discard(e)
+s.remove(e)
 s.issubset(t)
 s.issuperset(t)
 s | t
@@ -389,8 +392,12 @@ np.random.randn(10)
 np.random.normal(mu, sigma, N)
 # Integer
 np.random.randint(0, 100, 20) # [0, 100) 20 sample
+np.random.randint(2, size=(10, 3)).shape == (10, 3)
 # seed
 np.random.seed(n)
+
+if random_state is not None:
+    np.random.seed(random_state)
 
 import random
 print(random.choice(['A', 'B', 'C']))
@@ -498,6 +505,15 @@ def main():
     logger.info('So should this')
     logger.warning('And this, too')
     logger.error('And this, too')
+
+# short version
+# in module
+import logging
+logger = logging.getLogger(__name__)
+logger.debug('hoge')
+# in main function
+import logging
+logging.basicConfig(level=logging.DEBUG)
 endsnippet
 
 snippet directory
@@ -729,4 +745,11 @@ class Read(NamedTuple):
 
 r = Read(10, 'hoge')
 r.pos = 100
+endsnippet
+
+snippet defaultdict
+from collections import defaultdict
+defaultdict(list)
+defaultdict(int)
+defaultdict(lambda: defaultdict(list))
 endsnippet
