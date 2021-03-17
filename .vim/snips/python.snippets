@@ -753,3 +753,46 @@ defaultdict(list)
 defaultdict(int)
 defaultdict(lambda: defaultdict(list))
 endsnippet
+
+snippet pathlib
+from pathlib import Path
+
+# absolute
+Path('/usr/bin/hoge')
+Path('.')
+Path(__file__)
+p.is_absolute() == True
+
+# relative
+Path('foo/bar')
+p.is_absolute() == False
+
+# conversion
+# absolute -> relative
+Path('/usr/local/bin/hoge').relative_to(Path('/usr/local')) == Path('bin/hoge')
+# relative -> absolute
+Path('./hoge').resolve() == Path('/home/ryought/hoge')
+
+# parent
+Path('/home/ryought/hoge/fuga.txt').parent == Path('/home/ryought/hoge')
+Path('hoge/fuga/hige.txt').parent == Path('home/fuga')
+
+# iter
+Path('docs').iterdir() == [Path('docs/A.txt'), Path('docs/B')]
+p.glob('**/*') # recursive
+p.glob('*.py')
+
+# name
+Path('/home/ryought/hoge/fuga.txt').name == 'fuga.txt'
+Path('/home/ryought/hoge/fuga.tar.gz').suffix == 'gz'
+Path('/home/ryought/hoge/fuga.tar.gz').stem == 'fuga.tar'
+
+# check
+Path('/usr/bin/hoge').exists()
+Path('/usr/bin/hoge').is_dir()
+Path('/usr/bin/hoge').is_file()
+
+# modify
+Path('/usr/bin/hoge').mkdir(parents=True, exist_ok=True)
+Path().rename()
+endsnippet

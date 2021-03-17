@@ -47,9 +47,12 @@ endsnippet
 
 snippet sort "array sort"
 var numbers = [4, 2, 5, 1, 3];
+// inplace
 numbers.sort(function(a, b) {
   return a - b;
 });
+// not inplace
+numbers.concat().sort();
 endsnippet
 
 snippet floor "floor"
@@ -243,4 +246,32 @@ const b64 = btoa(packets_binstr)
 const bstr = atob(b64)
 const out = JSON.parse(pako.ungzip(bstr, { to: 'string' }))
 console.log('check', next, b64, out)
+endsnippet
+
+snippet reduce
+arr.reduce(function (acc, obj) {
+	let key = obj[property]
+	if (!acc[key]) acc[key] = []
+	acc[key].push(obj)
+	return acc
+}, {})
+endsnippet
+
+snippet for
+for (const e of [e1, e2, e3]) // e
+for (const k in { k1: e1, k2: e2 }) // obj[k]
+for (let i = 0; i < arr.length; i++) // arr[i]
+// forEach: cannot use for early return!
+endsnippet
+
+snippet argmax
+const x = Math.max(arr)
+arr.indexOf(x)
+endsnippet
+
+snippet range
+// [0, 1, 2, 3, 4]
+Array.from({length: 5}, (v, k) => k)
+// or
+[...Array(5).keys()]
 endsnippet
