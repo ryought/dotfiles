@@ -44,7 +44,22 @@ if __name__ == '__main__':
     main()
 endsnippet
 
-snippet """ "docstring"
+snippet """
+"""
+$1
+Parameters
+----------
+$2 : list of str, optional, default: ''
+    $3
+Returns
+-------
+Examples
+--------
+>>> $4
+"""
+endsnippet
+
+snippet docstring "docstring"
 """short description
 
 description in detail
@@ -469,6 +484,7 @@ parser.add_argument('-g', '--generate', dest='hoge', help='optional argument')
 parser.add_argument('--aa', dest='aa', default=42, help='have default value( --aa 52 if not exist, aa=42 )')
 parser.add_argument('--mode', required=True, help='required flag( --mode HOGE )')
 parser.add_argument('mode', type=str, help='upload or fetch', choices=['upload', 'fetch'])
+parser.add_argument('--tasks', nargs='*', choices=['a', 'b', 'c'])
 parser.add_argument('--debug', action='store_true', help='Bool flag( --debug or no )')
 args = parser.parse_args()
 print(args.path, args.hoge, args.aa, args.mode, args)
@@ -795,4 +811,58 @@ Path('/usr/bin/hoge').is_file()
 # modify
 Path('/usr/bin/hoge').mkdir(parents=True, exist_ok=True)
 Path().rename()
+endsnippet
+
+snippet dataclass
+import dataclasses
+
+@dataclasses.dataclass
+class User:
+    name: str
+    age: int = 0
+endsnippet
+
+snippet paf
+with PafFile(args.paf_filename) as paf:
+    for record in paf:
+        ori = str(record.strand)
+        if record.strand is Strand.Forward:
+            print(record.qname, record.qlen, record.qstart, record.qend, record.strand, 'for', ori)
+        if record.strand is Strand.Reverse:
+            print(record.qname, record.qlen, record.qstart, record.qend, record.strand, 'rev', ori)
+endsnippet
+
+snippet stderr
+import sys
+print('hoge', file=sys.stderr)
+endsnippet
+
+snippet pltclose
+plt.plot()
+plt.savefig('hoge.png')
+plt.clf()
+plt.close()
+endsnippet
+
+snippet backend
+# only write to files
+import matplotlib
+matplotlib.use("Agg")
+
+# interactive on hx
+# $ DISPLAY=:1 python hoge.py
+# and
+import matplotlib
+matplotlib.use('TkAgg')
+endsnippet
+
+snippet for-else
+xs = [1,2,3,4]
+while True:
+    for i in range(len(xs)):
+        if xs[i] < 5:
+            xs[i] += 5
+            break # for-loop
+    else:
+        break # while-loop
 endsnippet
