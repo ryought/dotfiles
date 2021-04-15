@@ -41,6 +41,16 @@ export HISTIGNORE="history*:fg*:bg*:vi"
 # uninstall by removing these lines or running `tabtab uninstall sls`
 [ -f /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash ] && . /usr/local/lib/node_modules/serverless/node_modules/tabtab/.completions/sls.bash
 
+## load other files ##
+# .bashrc_*: machine dependent settings
+for file in ~/.bashrc_*;
+do
+  if [[ -r "$file" ]] && [[ -f "$file" ]]; then
+    source $file
+  fi
+done
+unset file
+
 ## direnv ##
 if type "direnv" > /dev/null 2>&1
 then
@@ -129,13 +139,3 @@ export LANG=ja_JP.UTF-8
 ## global PATH setting ##
 # for my tools
 export PATH="$PATH:$HOME/.tools:$HOME/.tools-private/bin"
-
-## load other files ##
-# .bashrc_*: machine dependent settings
-for file in ~/.bashrc_*;
-do
-  if [[ -r "$file" ]] && [[ -f "$file" ]]; then
-    source $file
-  fi
-done
-unset file
